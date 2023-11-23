@@ -20,80 +20,23 @@
 ]]></content>
   </entry>
   <entry>
-    <title>微信数据导出-整体框架</title>
-    <url>/post/5f61f9f3f806/</url>
-    <content><![CDATA[<p>既可以从电脑端获取数据，也可以从手机端获取数据</p>
-<h3 id="手机端">手机端</h3>
-<h4 id="准备数据库">准备数据库</h4>
-<p>手机端微信聊天数据存储在 <code>/data/data/com.tencent.mm/MicroMsg/&#123;hash&#125;/EnMicroMsg.db</code>，需要有 root 权限或者腾讯开发用户。因此最简单的方法就是将数据备份至一台有 root 权限的安卓设备中。</p>
-<p>注意，微信设计相当糟糕，从手机备份至电脑的数据一般存放在 <code>C:\Users\&#123;UserName&#125;\Documents\WeChat Files\&#123;wxid&#125;\BackupFiles\</code>，电脑微信无法访问其中的数据，只能通过备份还原至手机微信后才可通过手机微信读取其中的信息。其次，电脑微信和手机微信中数据往往都存在一定程度的缺失（用户消息全存本地真是鬼才设计），需要综合两者才能得到比较完整的聊天记录，可以通过电脑微信的 <code>迁移</code> 功能将数据合并至手机。</p>
-<p>关于有 root 权限的安卓设备，这里推荐安卓模拟器。即便是有 root 后的手机也推荐使用模拟器，因为模拟器中的手机微信和电脑微信之间传输数据全部都是在本机完成，速度相当快，特别是体验过微信那龟速备份后就更是如此。以我为例，最大速度甚至能跑到 23MB/s，这可是用 wifi 难以企及。</p>
-<p>关于微信的备份，电脑微信无法选择将备份还原至哪个设备，因此需要在手机微信上退出登录后再进行还原。</p>
-<h4 id="提取数据库">提取数据库</h4>
-<h5 id="有-root-权限">有 root 权限</h5>
-<p>有 root 权限就比较简单，直接去那个目录复制到电脑即可。<br>
-但我使用的模拟器即便是开了 root 在自带的文件管理器中也无法找到那个目录，因此需要使用 ADB，ADB 功能繁多，这里只简单记录一下用到的命令。</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备名称，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br></pre></td></tr></table></figure>
-<p>但是我在 <code>adb pull</code> 时出现 <code>permission denied</code>，需要一些额外操作。</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br><span class="line"></span><br><span class="line">su <span class="comment"># 当前会话取得root权限，提示符`$`应该会变为`#`，未变说明设备未root或者其他错误</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment">#可以先复制到`/sdcard/`中，然后再使用`adb pull`</span></span><br></pre></td></tr></table></figure>
-<h5 id="无-root-权限">无 root 权限</h5>
-<p>使用手机的备份功能，将备份文件解密后即可获取，具体可参见另一篇文章 <a href="../../%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA-%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E8%A7%A3%E5%AF%86.md">微信数据导出-备份数据解密</a></p>
-<h4 id="获取密码">获取密码</h4>
-<p>微信数据库密码的生成方式，是手机的 IMEI 号码与微信 uin 拼接起来之后的 MD5 值的前 7 位， MD5 取小写字母</p>
-<p>IMEI 可通过手机拨号 <code>*#06#</code> 查看，每个卡槽一个 IMEI （取前 14 位），每部手机一个 MEID。但生成密码所用的 IMEI 不一定是当前手机的，有说法是注册时手机的 IMEI，也有说用 EMID<br>
-微信 uin 可以从 <code>/data/data/com.tencent.mm/shared_prefs/auth_info_key_prefs.xml</code> 中 <code>&lt;int name=&quot;_auth_uin&quot; value=&quot;uid&quot; /&gt;</code> 获取，据说 <code>\com.tencent.mm\sp\system_config_prefs.xml</code> 也有，但是我没找到</p>
-<p>但这个方法我一直都没成功，不知是不是真的 IMEM 不对<br>
-一些相关的文章已保存至 [[破解相关文章]]，可供研究</p>
-<h4 id="破解密码">破解密码</h4>
-<p>推荐使用该方法，因为密码长度为 7 位，太短了。即便是 3050 跑暴力破解也不需要半小时。<br>
-使用 SQLCipher-Password-Cracker-OpenCL，参见 <a href="../../%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA/SQLCipher-Password-Cracker-OpenCL.md">SQLCipher-Password-Cracker-OpenCL</a></p>
-<h2 id="电脑端">电脑端</h2>
-<h3 id="获取数据库">获取数据库</h3>
-<p>这个不需要什么操作，很简单的复制即可，文件位于 <code>C:\Users\&lt;username&gt;\Documents\WeChat Files\&lt;wxid&gt;\Msg\</code> 下，分为很多个，比如 <code>.\Multi\MSG1.db</code><br>
-貌似一个数据库最大 240MB，超过后会分割为多个</p>
-<h4 id="破解密码-2">破解密码</h4>
-<p>这个可以直接去内存里抓密码<br>
-参见项目：<br>
-<a href="https://github.com/AdminTest0/SharpWxDump">AdminTest0/SharpWxDump</a><br>
-<a href="https://github.com/SpenserCai/GoWxDump">SpenserCai/GoWxDump</a><br>
-<a href="https://github.com/SpenserCai/GoWxDump/files/11182406/GoWxDump.zip">SpenserCai/GoWxDump</a></p>
-<p>据 <a href="https://blog.csdn.net/weixin_44495599/article/details/130030309">微信PC端数据库文件解密_微信db文件_异想之旅的博客-CSDN博客</a> 这个博主称：</p>
-<blockquote>
-<p>其中第一个项目在编译时就遇到了困难（本人没用过 C# 和 .NET），我最后是狠下心来跟着 <a href="https://cn-sec.com/archives/1596143.html">这篇教程</a> 下了个 VS 才编译出来，也将编译产物上传到了 <a href="https://github.com/yxzlwz/SharpWxDump/releases/tag/2023.4.2">我 Fork 的仓库</a>，然而发给别人用的时候发现似乎兼容性比较差，悲……不过应该说自己在自己的设备上用 VS 编译是最可靠的</p>
-<p>第二个仓库就方便很多，只要电脑上有 Go 环境直接执行 <code>build.bat</code> 就行（记得配置 <code>go get</code> 的代理，否则下载第三方包会很慢）。不过需要说明的是，建议大家只使用它的 <code>show_info</code> 功能，它的解密极其不可靠。</p>
-</blockquote>
-<p>第三个为他自己编译结果，可以不需要 Go 环境</p>
-<h3 id="其他相关项目">其他相关项目</h3>
-<p>微信聊天记录挖掘机（未找到官网，应该是闭源）<br>
-<a href="https://www.louyue.com/pcwx.htm">楼月电脑版微信聊天记录导出软件官方下载及使用说明</a>（闭源收费）<br>
-<img src="/post/images/20220830_%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7%E6%96%B0%E7%89%88%E6%9C%AC.zip" alt="" loading="lazy"><br>
-wx-dump-key-v0.1.1.exe（半数引擎报毒，谨慎使用）</p>
-<h2 id="手机向电脑备份文件的破解">手机向电脑备份文件的破解</h2>
-<p>大多数人都说不可破解，但下面有一些线索可供参考<br>
-<a href="https://github.com/sumous/anti_sign/issues/4">微信聊天记录 BAK_0_TEXT 和 BAK_0_MEDIA · Issue #4 · sumous/anti_sign · GitHub</a></p>
-<h3 id="杂项">杂项</h3>
-<p><a href="https://github.com/symbolic/ExportWeChatHistory/tree/master">GitHub - symbolic/ExportWeChatHistory: export wechat history 导出微信聊天记录</a><br>
-（闭源免费）</p>
-<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=1641882&amp;highlight=%CE%A2%D0%C5%CA%FD%BE%DD%BF%E2%BD%E2%C3%DC">PC端微信数据库解密Python版【更新】 - 『编程语言区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn</a><br>
-<a href="https://www.52pojie.cn/thread-1153671-1-1.html">PC端微信数据库解密Python版 - 『编程语言区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn</a><br>
-（需要 52pojie 账号与财富值，估计与我文章中采用的 python 脚本大差不差）</p>
-<p><a href="https://github.com/l123456789jy/WxDatabaseDecryptKey">Site Unreachable</a>（手机需要 root）</p>
-<h2 id="MAC-IOS-系统">MAC/IOS 系统</h2>
-<h3 id="IOS">IOS</h3>
-<p>IOS 是利用 iTunes 备份至电脑后用软件解密<br>
-<a href="http://wxbackup.imxfd.com/">微信聊天记录导出</a>（闭源免费）<br>
-<a href="https://github.com/BlueMatthew/WechatExporter">GitHub - BlueMatthew/WechatExporter: Wechat Chat History Exporter 微信聊天记录导出备份程序</a><br>
-<a href="https://github.com/tsycnh/WeChatExporter">GitHub - tsycnh/WeChatExporter: 一个可以快速导出、查看你的微信聊天记录的工具</a></p>
-<h3 id="MAC">MAC</h3>
-<p>MAC 与 win 类似，都是直接从微信的内存抓取数据库密码，然后对桌面版微信的数据库破解<br>
-<a href="https://github.com/nalzok/wechat-decipher-macos">GitHub - nalzok/wechat-decipher-macos: DTrace scripts to extract chat history from WeChat on macOS</a></p>
+    <title>微信数据导出-ADB</title>
+    <url>/post/f68e8c50eb0c/</url>
+    <content><![CDATA[<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备序列号，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br><span class="line"><span class="comment"># `-d`参数代表选择设备（Device），`-e`参数代表选择模拟器（Emulator），用于有且只有一台设备和一台模拟器连接到ADB</span></span><br><span class="line"></span><br><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br></pre></td></tr></table></figure>
+<h4 id="adb-pull-报错-Permission-denied"><code>adb pull</code> 报错 <code>Permission denied</code></h4>
+<p>先复制到 <code>/sdcard/</code> 后再 <code>adb pull</code></p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; /sdcard/</span><br><span class="line">adb pull &lt;source_path&gt; &lt;destine_path&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="error-more-than-one-device-emulator"><code>error: more than one device/emulator</code></h4>
+<p>有多个设备同时连接 ADB，需要指定设备</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb <span class="literal">-s</span> &lt;SerialNumber&gt; shell <span class="comment"># 或者其他命令</span></span><br></pre></td></tr></table></figure>
 ]]></content>
       <categories>
         <category>微信数据导出</category>
       </categories>
       <tags>
+        <tag>ADB</tag>
         <tag>CS</tag>
-        <tag>微信</tag>
+        <tag>Android</tag>
       </tags>
   </entry>
   <entry>
@@ -174,26 +117,6 @@ PD = Dedicated to or marked as being in the public domain via one of our <a href
       </tags>
   </entry>
   <entry>
-    <title>微信数据导出-ADB</title>
-    <url>/post/f68e8c50eb0c/</url>
-    <content><![CDATA[<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备序列号，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br><span class="line"><span class="comment"># `-d`参数代表选择设备（Device），`-e`参数代表选择模拟器（Emulator），用于有且只有一台设备和一台模拟器连接到ADB</span></span><br><span class="line"></span><br><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br></pre></td></tr></table></figure>
-<h4 id="adb-pull-报错-Permission-denied"><code>adb pull</code> 报错 <code>Permission denied</code></h4>
-<p>先复制到 <code>/sdcard/</code> 后再 <code>adb pull</code></p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; /sdcard/</span><br><span class="line">adb pull &lt;source_path&gt; &lt;destine_path&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="error-more-than-one-device-emulator"><code>error: more than one device/emulator</code></h4>
-<p>有多个设备同时连接 ADB，需要指定设备</p>
-<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb <span class="literal">-s</span> &lt;SerialNumber&gt; shell <span class="comment"># 或者其他命令</span></span><br></pre></td></tr></table></figure>
-]]></content>
-      <categories>
-        <category>微信数据导出</category>
-      </categories>
-      <tags>
-        <tag>CS</tag>
-        <tag>ADB</tag>
-        <tag>Android</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>功能测试</title>
     <url>/post/b675d74a765f/</url>
     <content><![CDATA[<p><span class="katex-display"><span class="katex"><span class="katex-mathml"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><semantics><mtable rowspacing="0.25em" columnalign="right left" columnspacing="0em"><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mn>1</mn></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mn>2</mn><mi>ω</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mn>2</mn><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup><mo>+</mo><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi>π</mi><mo stretchy="false">)</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mn>2</mn><mi>k</mi><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup><mo>+</mo><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup><munderover><mo>∑</mo><mrow><mi>k</mi><mo>=</mo><mo>−</mo><mi mathvariant="normal">∞</mi></mrow><mi mathvariant="normal">∞</mi></munderover><mo>∣</mo><mover accent="true"><mi>φ</mi><mo>^</mo></mover><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mo stretchy="false">(</mo><mn>2</mn><mi>k</mi><mo>+</mo><mn>1</mn><mo stretchy="false">)</mo><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr><mtr><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow></mrow></mstyle></mtd><mtd><mstyle scriptlevel="0" displaystyle="true"><mrow><mrow></mrow><mo>=</mo><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup><mo>+</mo><mo>∣</mo><mi>H</mi><mo stretchy="false">(</mo><mi>ω</mi><mo>+</mo><mi>π</mi><mo stretchy="false">)</mo><msup><mo>∣</mo><mn>2</mn></msup></mrow></mstyle></mtd></mtr></mtable><annotation encoding="application/x-tex">\begin{split}
@@ -231,6 +154,83 @@ graph LR
       </categories>
       <tags>
         <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>微信数据导出-整体框架</title>
+    <url>/post/5f61f9f3f806/</url>
+    <content><![CDATA[<p>既可以从电脑端获取数据，也可以从手机端获取数据</p>
+<h3 id="手机端">手机端</h3>
+<h4 id="准备数据库">准备数据库</h4>
+<p>手机端微信聊天数据存储在 <code>/data/data/com.tencent.mm/MicroMsg/&#123;hash&#125;/EnMicroMsg.db</code>，需要有 root 权限或者腾讯开发用户。因此最简单的方法就是将数据备份至一台有 root 权限的安卓设备中。</p>
+<p>注意，微信设计相当糟糕，从手机备份至电脑的数据一般存放在 <code>C:\Users\&#123;UserName&#125;\Documents\WeChat Files\&#123;wxid&#125;\BackupFiles\</code>，电脑微信无法访问其中的数据，只能通过备份还原至手机微信后才可通过手机微信读取其中的信息。其次，电脑微信和手机微信中数据往往都存在一定程度的缺失（用户消息全存本地真是鬼才设计），需要综合两者才能得到比较完整的聊天记录，可以通过电脑微信的 <code>迁移</code> 功能将数据合并至手机。</p>
+<p>关于有 root 权限的安卓设备，这里推荐安卓模拟器。即便是有 root 后的手机也推荐使用模拟器，因为模拟器中的手机微信和电脑微信之间传输数据全部都是在本机完成，速度相当快，特别是体验过微信那龟速备份后就更是如此。以我为例，最大速度甚至能跑到 23MB/s，这可是用 wifi 难以企及。</p>
+<p>关于微信的备份，电脑微信无法选择将备份还原至哪个设备，因此需要在手机微信上退出登录后再进行还原。</p>
+<h4 id="提取数据库">提取数据库</h4>
+<h5 id="有-root-权限">有 root 权限</h5>
+<p>有 root 权限就比较简单，直接去那个目录复制到电脑即可。<br>
+但我使用的模拟器即便是开了 root 在自带的文件管理器中也无法找到那个目录，因此需要使用 ADB，ADB 功能繁多，这里只简单记录一下用到的命令。</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备名称，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br></pre></td></tr></table></figure>
+<p>但是我在 <code>adb pull</code> 时出现 <code>permission denied</code>，需要一些额外操作。</p>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br><span class="line"></span><br><span class="line">su <span class="comment"># 当前会话取得root权限，提示符`$`应该会变为`#`，未变说明设备未root或者其他错误</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment">#可以先复制到`/sdcard/`中，然后再使用`adb pull`</span></span><br></pre></td></tr></table></figure>
+<h5 id="无-root-权限">无 root 权限</h5>
+<p>使用手机的备份功能，将备份文件解密后即可获取，具体可参见另一篇文章 <a href="../../%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA-%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E8%A7%A3%E5%AF%86.md">微信数据导出-备份数据解密</a></p>
+<h4 id="获取密码">获取密码</h4>
+<p>微信数据库密码的生成方式，是手机的 IMEI 号码与微信 uin 拼接起来之后的 MD5 值的前 7 位， MD5 取小写字母</p>
+<p>IMEI 可通过手机拨号 <code>*#06#</code> 查看，每个卡槽一个 IMEI （取前 14 位），每部手机一个 MEID。但生成密码所用的 IMEI 不一定是当前手机的，有说法是注册时手机的 IMEI，也有说用 EMID<br>
+微信 uin 可以从 <code>/data/data/com.tencent.mm/shared_prefs/auth_info_key_prefs.xml</code> 中 <code>&lt;int name=&quot;_auth_uin&quot; value=&quot;uid&quot; /&gt;</code> 获取，据说 <code>\com.tencent.mm\sp\system_config_prefs.xml</code> 也有，但是我没找到</p>
+<p>但这个方法我一直都没成功，不知是不是真的 IMEM 不对<br>
+一些相关的文章已保存至 [[破解相关文章]]，可供研究</p>
+<h4 id="破解密码">破解密码</h4>
+<p>推荐使用该方法，因为密码长度为 7 位，太短了。即便是 3050 跑暴力破解也不需要半小时。<br>
+使用 SQLCipher-Password-Cracker-OpenCL，参见 <a href="../../%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA/SQLCipher-Password-Cracker-OpenCL.md">SQLCipher-Password-Cracker-OpenCL</a></p>
+<h2 id="电脑端">电脑端</h2>
+<h3 id="获取数据库">获取数据库</h3>
+<p>这个不需要什么操作，很简单的复制即可，文件位于 <code>C:\Users\&lt;username&gt;\Documents\WeChat Files\&lt;wxid&gt;\Msg\</code> 下，分为很多个，比如 <code>.\Multi\MSG1.db</code><br>
+貌似一个数据库最大 240MB，超过后会分割为多个</p>
+<h4 id="破解密码-2">破解密码</h4>
+<p>这个可以直接去内存里抓密码<br>
+参见项目：<br>
+<a href="https://github.com/AdminTest0/SharpWxDump">AdminTest0/SharpWxDump</a><br>
+<a href="https://github.com/SpenserCai/GoWxDump">SpenserCai/GoWxDump</a><br>
+<a href="https://github.com/SpenserCai/GoWxDump/files/11182406/GoWxDump.zip">SpenserCai/GoWxDump</a></p>
+<p>据 <a href="https://blog.csdn.net/weixin_44495599/article/details/130030309">微信PC端数据库文件解密_微信db文件_异想之旅的博客-CSDN博客</a> 这个博主称：</p>
+<blockquote>
+<p>其中第一个项目在编译时就遇到了困难（本人没用过 C# 和 .NET），我最后是狠下心来跟着 <a href="https://cn-sec.com/archives/1596143.html">这篇教程</a> 下了个 VS 才编译出来，也将编译产物上传到了 <a href="https://github.com/yxzlwz/SharpWxDump/releases/tag/2023.4.2">我 Fork 的仓库</a>，然而发给别人用的时候发现似乎兼容性比较差，悲……不过应该说自己在自己的设备上用 VS 编译是最可靠的</p>
+<p>第二个仓库就方便很多，只要电脑上有 Go 环境直接执行 <code>build.bat</code> 就行（记得配置 <code>go get</code> 的代理，否则下载第三方包会很慢）。不过需要说明的是，建议大家只使用它的 <code>show_info</code> 功能，它的解密极其不可靠。</p>
+</blockquote>
+<p>第三个为他自己编译结果，可以不需要 Go 环境</p>
+<h3 id="其他相关项目">其他相关项目</h3>
+<p>微信聊天记录挖掘机（未找到官网，应该是闭源）<br>
+<a href="https://www.louyue.com/pcwx.htm">楼月电脑版微信聊天记录导出软件官方下载及使用说明</a>（闭源收费）<br>
+<img src="/post/images/20220830_%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7%E6%96%B0%E7%89%88%E6%9C%AC.zip" alt="" loading="lazy"><br>
+wx-dump-key-v0.1.1.exe（半数引擎报毒，谨慎使用）</p>
+<h2 id="手机向电脑备份文件的破解">手机向电脑备份文件的破解</h2>
+<p>大多数人都说不可破解，但下面有一些线索可供参考<br>
+<a href="https://github.com/sumous/anti_sign/issues/4">微信聊天记录 BAK_0_TEXT 和 BAK_0_MEDIA · Issue #4 · sumous/anti_sign · GitHub</a></p>
+<h3 id="杂项">杂项</h3>
+<p><a href="https://github.com/symbolic/ExportWeChatHistory/tree/master">GitHub - symbolic/ExportWeChatHistory: export wechat history 导出微信聊天记录</a><br>
+（闭源免费）</p>
+<p><a href="https://www.52pojie.cn/forum.php?mod=viewthread&amp;tid=1641882&amp;highlight=%CE%A2%D0%C5%CA%FD%BE%DD%BF%E2%BD%E2%C3%DC">PC端微信数据库解密Python版【更新】 - 『编程语言区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn</a><br>
+<a href="https://www.52pojie.cn/thread-1153671-1-1.html">PC端微信数据库解密Python版 - 『编程语言区』 - 吾爱破解 - LCG - LSG |安卓破解|病毒分析|www.52pojie.cn</a><br>
+（需要 52pojie 账号与财富值，估计与我文章中采用的 python 脚本大差不差）</p>
+<p><a href="https://github.com/l123456789jy/WxDatabaseDecryptKey">Site Unreachable</a>（手机需要 root）</p>
+<h2 id="MAC-IOS-系统">MAC/IOS 系统</h2>
+<h3 id="IOS">IOS</h3>
+<p>IOS 是利用 iTunes 备份至电脑后用软件解密<br>
+<a href="http://wxbackup.imxfd.com/">微信聊天记录导出</a>（闭源免费）<br>
+<a href="https://github.com/BlueMatthew/WechatExporter">GitHub - BlueMatthew/WechatExporter: Wechat Chat History Exporter 微信聊天记录导出备份程序</a><br>
+<a href="https://github.com/tsycnh/WeChatExporter">GitHub - tsycnh/WeChatExporter: 一个可以快速导出、查看你的微信聊天记录的工具</a></p>
+<h3 id="MAC">MAC</h3>
+<p>MAC 与 win 类似，都是直接从微信的内存抓取数据库密码，然后对桌面版微信的数据库破解<br>
+<a href="https://github.com/nalzok/wechat-decipher-macos">GitHub - nalzok/wechat-decipher-macos: DTrace scripts to extract chat history from WeChat on macOS</a></p>
+]]></content>
+      <categories>
+        <category>微信数据导出</category>
+      </categories>
+      <tags>
+        <tag>CS</tag>
+        <tag>微信</tag>
       </tags>
   </entry>
 </search>
