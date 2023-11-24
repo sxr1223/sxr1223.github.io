@@ -20,83 +20,6 @@
 ]]></content>
   </entry>
   <entry>
-    <title>CC知识分享协议</title>
-    <url>/post/2a35a3ca3082/</url>
-    <content><![CDATA[<h4 id="协议介绍">协议介绍</h4>
-<p>知识共享 (Creative Commons) 协议，俗称 CC 协议，它包含多个属性，可根据需求进行组合后声明版权<br>
-CC 协议有 1.0, 2.0, 2.5, 3.0, 4.0 版本，建议选择的时候直接选最新的 4.0 版本</p>
-<p>原则上适用于全世界范围<br>
-协议启动后可以撤回，但是在协议存续期间签发出去的授权将继续有效，不能撤销已经发布出去的授权</p>
-<p>主动宣告他人在协议限定范围内的分享行为可以不向作者告知。分享行为包括：网络上的发表、转载、二次发布，实体中的转载、印刷、使用、展览等，一般而言，这些行为概括为“转载”、“使用”、“二次演绎”三种形式。<br>
-主动宣告不允许的使用行为。包括：商业性使用 (NC)、二次创作 (ND)、改变授权方式 (SA) 的再次分享</p>
-<p>虽然这么说，但 CC 协议在国内只能算“君子协议”，目前在 CC 协议在中国知名度不高，直到 2021 年才出现首次依据 GPL 协议判罚，CC 协议至今还未出现</p>
-<blockquote>
-<p>CC 协议是基于国际法、国际惯例、美国法律撰写的基础版本（即国际版），为适应各国不同的版权政策，一般都需要进行本地化。中国大陆地区对 CC 3.0 协议进行了本地化，以适合中国地区的法律，这也是目前中国最新版本的 CC 协议。根据 CC 组织的说法，4.0 版本在最大程度上实现了在各司法区的适用，从 4.0 版本起，CC 协议可以不必等待各司法区的知识共享组织进行本地化，可以直接使用。目前，在 4.0 版协议发布后，3.0 的中文版就从 CC 官网上消失了，4.0 则还未本地化。</p>
-</blockquote>
-<blockquote></blockquote>
-<blockquote>
-<p><em>摘自 <a href="https://www.bilibili.com/read/cv2536622/">为什么你没授权就能用大大的作品？？—“知识共享”（CC协议）简单介绍 - 哔哩哔哩</a></em></p>
-</blockquote>
-<h4 id="不同规格">不同规格</h4>
-<h5 id="BY">BY</h5>
-<p>署名 (Attribution)<br>
-使用你的作品的人必须给出适当的署名，提供指向对应 CC 协议的链接，同时标明是否（对原始作品）作了修改</p>
-<h5 id="NC">NC</h5>
-<p>非商业性使用 (NonCommercial)<br>
-他人不可将你的作品用于商业目的</p>
-<h5 id="ND">ND</h5>
-<p>禁止演绎 (NoDerivatives)<br>
-如果他人再混合、转换、或者基于你的作品创作，那么他不可以分发修改后的作品</p>
-<h5 id="SA">SA</h5>
-<p>相同方式共享 (ShareAlike)<br>
-如果他人再混合、转换、或者基于你的作品创作，那么他必须基于与原先许可协议相同的许可协议分发修改后的作品</p>
-<h5 id="PDM">PDM</h5>
-<p>公有领域标志 (public domain mark)<br>
-标记某一作品没有著作权，可以由任何人使用。典型对象包括著作权过期的古老作品、或者不构成作品的内容</p>
-<h5 id="CC0">CC0</h5>
-<blockquote>
-<p>CC0 只代表作者放弃作品的著作权，但对于作品中涉及的肖像权、物权、商标权和专利权等其它权利，没有要求放弃，CC0 协议亦不会审查该部分内容的权利人<br>
-CC0 规定，只有真正的作者才能放弃作品版权</p>
-<p>我国《著作权法》规定，作品的署名权、修改权等著作人身权利由作者专属享有，是不能放弃和转让的，所以即使 CC0 协议声明放弃一切权利，在中国由于著作人身权不可放弃，即使作品签署了 CC0 协议，也依然有侵权的风险，特别是如果起诉的话，大概率会被法院判定“放弃版权”无效，而判决使用者侵权</p>
-<p><em>本段出处已不可考</em></p>
-</blockquote>
-<h4 id="如何声明">如何声明</h4>
-<p>可以使用这个网站在线生成：<a href="https://chooser-beta.creativecommons.org/">Choose a License</a>，跟随指引选择协议规格，填写作品相关信息后即可自动生成代码。将响应代码插入文章即可<br>
-如果作品是文件的话，也可以仿照 git repo，在根目录下放置 LICENSE.txt 文件，文件内写上具体的协议内容。c 纯文本的协议内容在：<a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt">creativecommons.org/licenses/by/4.0/legalcode.txt</a></p>
-<h4 id="关于文章素材">关于文章素材</h4>
-<p>使用 CC 协议声明版权的前提是确实拥有这篇文章的版权。<br>
-如果引用了采用 CC 协议声明版权的文章或者素材，需要注意协议间的兼容性。<br>
-下图为素材的兼容性关系，以对角线为轴对称，行和列的意义可互换，打勾代表这两类协议的素材可同时在一篇文章内使用<br>
-<img src="/post/images/e7a2dcb82579119a55bfa12f40dc37ed_r.png" alt="" loading="lazy"></p>
-<p>混合后的文章可采用的协议如下：<br>
-<img src="/post/images/Pasted%20image%2020231121192407.png" alt="" loading="lazy"></p>
-<p>表格中绿色的是可以使用的协议；标有黄色的是技术层面上可行，但是官方不推荐的用法；灰色的是不能使用的协议<br>
-PD = Dedicated to or marked as being in the public domain via one of our <a href="https://creativecommons.org/publicdomain">public domain tools</a>, or other public domain material; adaptations of materials in the public domain may be built upon and licensed by the creator under any license terms desired.</p>
-<h4 id="版本间的兼容">版本间的兼容</h4>
-<p>版本间转化关系如下，未说明的即为不可转化<br>
-参见 <a href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
-<ul>
-<li>1.0 可转为 1.0</li>
-<li>2.0 可转为 2.0, 2.5, 3.0, 4.0</li>
-<li>2.5 可转为 2.5, 3.0, 4.0</li>
-<li>3.0 可转为 3.0, 4.0</li>
-<li>4.0 可转为 4.0</li>
-</ul>
-<h4 id="其他协议兼容性">其他协议兼容性</h4>
-<p>包含 BY-SA 4.0 许可的素材的文章，只能采用 Free Art License 或者 GPLv3 声明<br>
-参见 <a href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
-<h4 id="版权信息">版权信息</h4>
-<p>本文中的图片摘自 <a href="https://creativecommons.org/faq/">Frequently Asked Questions - Creative Commons</a></p>
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://space.bilibili.com/36345802/article">This passage</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/sxr1223/">sxr1223</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
-]]></content>
-      <categories>
-        <category>杂项</category>
-      </categories>
-      <tags>
-        <tag>开源协议</tag>
-      </tags>
-  </entry>
-  <entry>
     <title>微信数据导出-ADB</title>
     <url>/post/f68e8c50eb0c/</url>
     <content><![CDATA[<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备序列号，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br><span class="line"><span class="comment"># `-d`参数代表选择设备（Device），`-e`参数代表选择模拟器（Emulator），用于有且只有一台设备和一台模拟器连接到ADB</span></span><br><span class="line"></span><br><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br></pre></td></tr></table></figure>
@@ -235,6 +158,83 @@ graph LR
       </categories>
       <tags>
         <tag>test</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>CC知识分享协议</title>
+    <url>/post/2a35a3ca3082/</url>
+    <content><![CDATA[<h4 id="协议介绍">协议介绍</h4>
+<p>知识共享 (Creative Commons) 协议，俗称 CC 协议，它包含多个属性，可根据需求进行组合后声明版权<br>
+CC 协议有 1.0, 2.0, 2.5, 3.0, 4.0 版本，建议选择的时候直接选最新的 4.0 版本</p>
+<p>原则上适用于全世界范围<br>
+协议启动后可以撤回，但是在协议存续期间签发出去的授权将继续有效，不能撤销已经发布出去的授权</p>
+<p>主动宣告他人在协议限定范围内的分享行为可以不向作者告知。分享行为包括：网络上的发表、转载、二次发布，实体中的转载、印刷、使用、展览等，一般而言，这些行为概括为“转载”、“使用”、“二次演绎”三种形式。<br>
+主动宣告不允许的使用行为。包括：商业性使用 (NC)、二次创作 (ND)、改变授权方式 (SA) 的再次分享</p>
+<p>虽然这么说，但 CC 协议在国内只能算“君子协议”，目前在 CC 协议在中国知名度不高，直到 2021 年才出现首次依据 GPL 协议判罚，CC 协议至今还未出现</p>
+<blockquote>
+<p>CC 协议是基于国际法、国际惯例、美国法律撰写的基础版本（即国际版），为适应各国不同的版权政策，一般都需要进行本地化。中国大陆地区对 CC 3.0 协议进行了本地化，以适合中国地区的法律，这也是目前中国最新版本的 CC 协议。根据 CC 组织的说法，4.0 版本在最大程度上实现了在各司法区的适用，从 4.0 版本起，CC 协议可以不必等待各司法区的知识共享组织进行本地化，可以直接使用。目前，在 4.0 版协议发布后，3.0 的中文版就从 CC 官网上消失了，4.0 则还未本地化。</p>
+</blockquote>
+<blockquote></blockquote>
+<blockquote>
+<p><em>摘自 <a href="https://www.bilibili.com/read/cv2536622/">为什么你没授权就能用大大的作品？？—“知识共享”（CC协议）简单介绍 - 哔哩哔哩</a></em></p>
+</blockquote>
+<h4 id="不同规格">不同规格</h4>
+<h5 id="BY">BY</h5>
+<p>署名 (Attribution)<br>
+使用你的作品的人必须给出适当的署名，提供指向对应 CC 协议的链接，同时标明是否（对原始作品）作了修改</p>
+<h5 id="NC">NC</h5>
+<p>非商业性使用 (NonCommercial)<br>
+他人不可将你的作品用于商业目的</p>
+<h5 id="ND">ND</h5>
+<p>禁止演绎 (NoDerivatives)<br>
+如果他人再混合、转换、或者基于你的作品创作，那么他不可以分发修改后的作品</p>
+<h5 id="SA">SA</h5>
+<p>相同方式共享 (ShareAlike)<br>
+如果他人再混合、转换、或者基于你的作品创作，那么他必须基于与原先许可协议相同的许可协议分发修改后的作品</p>
+<h5 id="PDM">PDM</h5>
+<p>公有领域标志 (public domain mark)<br>
+标记某一作品没有著作权，可以由任何人使用。典型对象包括著作权过期的古老作品、或者不构成作品的内容</p>
+<h5 id="CC0">CC0</h5>
+<blockquote>
+<p>CC0 只代表作者放弃作品的著作权，但对于作品中涉及的肖像权、物权、商标权和专利权等其它权利，没有要求放弃，CC0 协议亦不会审查该部分内容的权利人<br>
+CC0 规定，只有真正的作者才能放弃作品版权</p>
+<p>我国《著作权法》规定，作品的署名权、修改权等著作人身权利由作者专属享有，是不能放弃和转让的，所以即使 CC0 协议声明放弃一切权利，在中国由于著作人身权不可放弃，即使作品签署了 CC0 协议，也依然有侵权的风险，特别是如果起诉的话，大概率会被法院判定“放弃版权”无效，而判决使用者侵权</p>
+<p><em>本段出处已不可考</em></p>
+</blockquote>
+<h4 id="如何声明">如何声明</h4>
+<p>可以使用这个网站在线生成：<a href="https://chooser-beta.creativecommons.org/">Choose a License</a>，跟随指引选择协议规格，填写作品相关信息后即可自动生成代码。将响应代码插入文章即可<br>
+如果作品是文件的话，也可以仿照 git repo，在根目录下放置 LICENSE.txt 文件，文件内写上具体的协议内容。c 纯文本的协议内容在：<a href="https://creativecommons.org/licenses/by/4.0/legalcode.txt">creativecommons.org/licenses/by/4.0/legalcode.txt</a></p>
+<h4 id="关于文章素材">关于文章素材</h4>
+<p>使用 CC 协议声明版权的前提是确实拥有这篇文章的版权。<br>
+如果引用了采用 CC 协议声明版权的文章或者素材，需要注意协议间的兼容性。<br>
+下图为素材的兼容性关系，以对角线为轴对称，行和列的意义可互换，打勾代表这两类协议的素材可同时在一篇文章内使用<br>
+<img src="/post/images/e7a2dcb82579119a55bfa12f40dc37ed_r.png" alt="" loading="lazy"></p>
+<p>混合后的文章可采用的协议如下：<br>
+<img src="/post/images/Pasted%20image%2020231121192407.png" alt="" loading="lazy"></p>
+<p>表格中绿色的是可以使用的协议；标有黄色的是技术层面上可行，但是官方不推荐的用法；灰色的是不能使用的协议<br>
+PD = Dedicated to or marked as being in the public domain via one of our <a href="https://creativecommons.org/publicdomain">public domain tools</a>, or other public domain material; adaptations of materials in the public domain may be built upon and licensed by the creator under any license terms desired.</p>
+<h4 id="版本间的兼容">版本间的兼容</h4>
+<p>版本间转化关系如下，未说明的即为不可转化<br>
+参见 <a href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
+<ul>
+<li>1.0 可转为 1.0</li>
+<li>2.0 可转为 2.0, 2.5, 3.0, 4.0</li>
+<li>2.5 可转为 2.5, 3.0, 4.0</li>
+<li>3.0 可转为 3.0, 4.0</li>
+<li>4.0 可转为 4.0</li>
+</ul>
+<h4 id="其他协议兼容性">其他协议兼容性</h4>
+<p>包含 BY-SA 4.0 许可的素材的文章，只能采用 Free Art License 或者 GPLv3 声明<br>
+参见 <a href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
+<h4 id="版权信息">版权信息</h4>
+<p>本文中的图片摘自 <a href="https://creativecommons.org/faq/">Frequently Asked Questions - Creative Commons</a></p>
+<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL" href="https://space.bilibili.com/36345802/article">This passage</a> by <a rel="cc:attributionURL dct:creator" property="cc:attributionName" href="https://github.com/sxr1223/">sxr1223</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+]]></content>
+      <categories>
+        <category>杂项</category>
+      </categories>
+      <tags>
+        <tag>开源协议</tag>
       </tags>
   </entry>
 </search>
