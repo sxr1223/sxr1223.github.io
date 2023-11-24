@@ -24,7 +24,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信数据导出-整体框架">
 <meta property="og:url" content="https://sxr1223.github.io/post/5f61f9f3f806/">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="sxr1223的小站">
 <meta property="og:description" content="既可以从电脑端获取数据，也可以从手机端获取数据 手机端 准备数据库 手机端微信聊天数据存储在 &#x2F;data&#x2F;data&#x2F;com.tencent.mm&#x2F;MicroMsg&#x2F;&amp;#123;hash&amp;#125;&#x2F;EnMicroMsg.db，需要有 root 权限或者腾讯开发用户。因此最简单的方法就是将数据备份至一台有 root 权限的安卓设备中。 注意，微信设计相当糟糕，从手机备份至电脑的数据一般存放在 C:\">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sxr1223.github.io/post/images/20220830_%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7%E6%96%B0%E7%89%88%E6%9C%AC.zip">
@@ -44,7 +44,7 @@
 <script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sxr1223.github.io/post/5f61f9f3f806/","path":"post/5f61f9f3f806/","title":"微信数据导出-整体框架"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>微信数据导出-整体框架 | Hexo</title>
+<title>微信数据导出-整体框架 | sxr1223的小站</title>
   
 
 
@@ -77,9 +77,10 @@
 
     <a href="/" class="brand" rel="start">
       <i class="logo-line"></i>
-      <p class="site-title">Hexo</p>
+      <p class="site-title">sxr1223的小站</p>
       <i class="logo-line"></i>
     </a>
+      <p class="site-subtitle" itemprop="description">电力电子，嵌入式以及一点点的CS</p>
   </div>
 
   <div class="site-nav-right">
@@ -130,7 +131,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -143,6 +144,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E7%AB%AF"><span class="nav-text">手机端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%87%86%E5%A4%87%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">准备数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">提取数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%9C%89-root-%E6%9D%83%E9%99%90"><span class="nav-text">有 root 权限</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%97%A0-root-%E6%9D%83%E9%99%90"><span class="nav-text">无 root 权限</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E5%AF%86%E7%A0%81"><span class="nav-text">获取密码</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81"><span class="nav-text">破解密码</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%94%B5%E8%84%91%E7%AB%AF"><span class="nav-text">电脑端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%8E%B7%E5%8F%96%E6%95%B0%E6%8D%AE%E5%BA%93"><span class="nav-text">获取数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%A0%B4%E8%A7%A3%E5%AF%86%E7%A0%81-2"><span class="nav-text">破解密码</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E9%A1%B9%E7%9B%AE"><span class="nav-text">其他相关项目</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%89%8B%E6%9C%BA%E5%90%91%E7%94%B5%E8%84%91%E5%A4%87%E4%BB%BD%E6%96%87%E4%BB%B6%E7%9A%84%E7%A0%B4%E8%A7%A3"><span class="nav-text">手机向电脑备份文件的破解</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%9D%82%E9%A1%B9"><span class="nav-text">杂项</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MAC-IOS-%E7%B3%BB%E7%BB%9F"><span class="nav-text">MAC&#x2F;IOS 系统</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#IOS"><span class="nav-text">IOS</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAC"><span class="nav-text">MAC</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -211,12 +213,12 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Hexo">
+      <meta itemprop="name" content="sxr1223的小站">
       <meta itemprop="description" content="">
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="微信数据导出-整体框架 | Hexo">
+      <meta itemprop="name" content="微信数据导出-整体框架 | sxr1223的小站">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
@@ -293,9 +295,9 @@
 <h5 id="有-root-权限">有 root 权限</h5>
 <p>有 root 权限就比较简单，直接去那个目录复制到电脑即可。<br>
 但我使用的模拟器即便是开了 root 在自带的文件管理器中也无法找到那个目录，因此需要使用 ADB，ADB 功能繁多，这里只简单记录一下用到的命令。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备名称，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 需在模拟器设置中打开root和ADB，一般重启后生效</span></span><br><span class="line">adb connect <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> <span class="comment"># ip和端口直接用模拟器设置中给的即可</span></span><br><span class="line"></span><br><span class="line">adb devices <span class="comment"># 查询当前ADB连接的设备</span></span><br><span class="line"></span><br><span class="line">adb pull <span class="literal">-s</span> <span class="number">127.0</span>.<span class="number">0.1</span>:<span class="number">2333</span> &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment"># `-s`参数指定设备名称，也就是`adb devices`中显示的名称，若只有一台设备连接可省略</span></span><br></pre></td></tr></table></figure>
 <p>但是我在 <code>adb pull</code> 时出现 <code>permission denied</code>，需要一些额外操作。</p>
-<figure class="highlight powershell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br><span class="line"></span><br><span class="line">su <span class="comment"># 当前会话取得root权限，提示符`$`应该会变为`#`，未变说明设备未root或者其他错误</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment">#可以先复制到`/sdcard/`中，然后再使用`adb pull`</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight powershell"><table><tr><td class="code"><pre><span class="line">adb shell <span class="comment">#进入ADB的交互式界面</span></span><br><span class="line"></span><br><span class="line">su <span class="comment"># 当前会话取得root权限，提示符`$`应该会变为`#`，未变说明设备未root或者其他错误</span></span><br><span class="line"></span><br><span class="line"><span class="built_in">cp</span>  &lt;source_path&gt; &lt;destine_path&gt;</span><br><span class="line"><span class="comment">#可以先复制到`/sdcard/`中，然后再使用`adb pull`</span></span><br></pre></td></tr></table></figure>
 <h5 id="无-root-权限">无 root 权限</h5>
 <p>使用手机的备份功能，将备份文件解密后即可获取，具体可参见另一篇文章 <a href="../../%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA/%E5%BE%AE%E4%BF%A1%E6%95%B0%E6%8D%AE%E5%AF%BC%E5%87%BA-%E5%A4%87%E4%BB%BD%E6%95%B0%E6%8D%AE%E8%A7%A3%E5%AF%86.md">微信数据导出-备份数据解密</a></p>
 <h4 id="获取密码">获取密码</h4>
