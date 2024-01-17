@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width">
 <meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.3.0">
-<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link rel="preconnect" href="https://fonts.font.im" crossorigin>
 <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
@@ -13,7 +13,7 @@
 
 <link rel="stylesheet" href="/css/main.css">
 
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic%7CCascadia+Mono:300,300italic,400,400italic,700,700italic%7CMicrosoft+Yahei:300,300italic,400,400italic,700,700italic%7CArial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="https://fonts.font.im/css?family=Lato:300,300italic,400,400italic,700,700italic%7CCascadia+Mono:300,300italic,400,400italic,700,700italic%7CMicrosoft+Yahei:300,300italic,400,400italic,700,700italic%7CArial:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" integrity="sha256-CTSx/A06dm1B063156EVh15m6Y67pAjZZaQc89LLSrU=" crossorigin="anonymous">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
@@ -21,12 +21,12 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sxr1223.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="既可以从电脑端获取数据，也可以从手机端获取数据 手机端 准备数据库 手机端微信聊天数据存储在 &#x2F;data&#x2F;data&#x2F;com.tencent.mm&#x2F;MicroMsg&#x2F;&amp;#123;hash&amp;#125;&#x2F;EnMicroMsg.db，需要有 root 权限或者腾讯开发用户。因此最简单的方法就是将数据备份至一台有 root 权限的安卓设备中。 注意，微信设计相当糟糕，从手机备份至电脑的数据一般存放在 C:\">
+    <meta name="description" content="微信数据导出-整体框架">
 <meta property="og:type" content="article">
 <meta property="og:title" content="微信数据导出-整体框架">
 <meta property="og:url" content="https://sxr1223.github.io/post/18c1db9d901b/">
 <meta property="og:site_name" content="sxr1223的小站">
-<meta property="og:description" content="既可以从电脑端获取数据，也可以从手机端获取数据 手机端 准备数据库 手机端微信聊天数据存储在 &#x2F;data&#x2F;data&#x2F;com.tencent.mm&#x2F;MicroMsg&#x2F;&amp;#123;hash&amp;#125;&#x2F;EnMicroMsg.db，需要有 root 权限或者腾讯开发用户。因此最简单的方法就是将数据备份至一台有 root 权限的安卓设备中。 注意，微信设计相当糟糕，从手机备份至电脑的数据一般存放在 C:\">
+<meta property="og:description" content="微信数据导出-整体框架">
 <meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="https://sxr1223.github.io/post/images/20220830_%E5%BE%AE%E4%BF%A1%E8%81%8A%E5%A4%A9%E8%AE%B0%E5%BD%95%E5%AF%BC%E5%87%BA%E5%B7%A5%E5%85%B7%E6%96%B0%E7%89%88%E6%9C%AC.zip">
 <meta property="article:published_time" content="2023-11-26T15:29:37.894Z">
@@ -200,7 +200,7 @@
       <a class="popular-posts-link" href="/post/747054a76dee/" rel="bookmark">
         <time class="popular-posts-time">2024-01-17</time>
         <br>
-      
+      SQLCipher-Password-Cracker-OpenCL使用记录
       </a>
     </li>
   </ul>
@@ -237,7 +237,7 @@
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
       <meta itemprop="name" content="微信数据导出-整体框架 | sxr1223的小站">
-      <meta itemprop="description" content="">
+      <meta itemprop="description" content="微信数据导出-整体框架">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
@@ -296,6 +296,7 @@
     </span>
 </div>
 
+            <div class="post-description">微信数据导出-整体框架</div>
         </div>
       </header>
 
