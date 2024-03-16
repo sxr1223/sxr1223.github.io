@@ -21,23 +21,29 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sxr1223.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="website">
-<meta property="og:title" content="sxr1223的小站">
-<meta property="og:url" content="https://sxr1223.github.io/tags/ADB/">
+    <meta name="description" content="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)">
+<meta property="og:url" content="https://sxr1223.github.io/post/7ca365d3b3bb/">
 <meta property="og:site_name" content="sxr1223的小站">
+<meta property="og:description" content="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)">
 <meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2024-03-16T14:03:19.352Z">
+<meta property="article:modified_time" content="2024-03-16T14:03:19.352Z">
 <meta property="article:author" content="sxr1223">
+<meta property="article:tag" content="FPGA&#x2F;tools&#x2F;Modelsim">
+<meta property="article:tag" content="FPGA&#x2F;IC&#x2F;Pangu">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="https://sxr1223.github.io/tags/ADB/">
+<link rel="canonical" href="https://sxr1223.github.io/post/7ca365d3b3bb/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":false,"lang":"zh-CN","comments":"","permalink":"","path":"tags/ADB/index.html","title":""}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sxr1223.github.io/post/7ca365d3b3bb/","path":"post/7ca365d3b3bb/","title":"PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>标签: ADB | sxr1223的小站</title>
+<title>PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110) | sxr1223的小站</title>
   
 
 
@@ -124,7 +130,7 @@
   
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           文章目录
@@ -137,6 +143,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%8E%B0%E8%B1%A1%E6%8F%8F%E8%BF%B0"><span class="nav-text">现象描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8E%9F%E5%9B%A0%E5%88%86%E6%9E%90"><span class="nav-text">原因分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">解决方案</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%80"><span class="nav-text">方案一</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%BA%8C"><span class="nav-text">方案二</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%96%B9%E6%A1%88%E4%B8%89"><span class="nav-text">方案三</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Quartus-%E4%B8%AD%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="nav-text">Quartus 中的解决方案</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0"><span class="nav-text">其他相关文章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -181,55 +188,218 @@
     </div>
 
     
+        <div class="sidebar-inner sidebar-post-related">
+          <div class="animated">
+              <div class="links-of-blogroll-title"><i class="fa fa-signs-post fa-fw"></i>
+    相关文章
+  </div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/post/1ac313ffec94/" rel="bookmark">
+        <time class="popular-posts-time">2024-03-16</time>
+        <br>
+      Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析）
+      </a>
+    </li>
+    <li class="popular-posts-item">
+      <a class="popular-posts-link" href="/post/7d43f2735452/" rel="bookmark">
+        <time class="popular-posts-time">2024-03-16</time>
+        <br>
+      Modelsim的库管理与编译
+      </a>
+    </li>
+  </ul>
+
+          </div>
+        </div>
   </aside>
 
 
     </div>
 
-    <div class="main-inner tag posts-collapse">
+    <div class="main-inner post posts-expand">
 
 
   
+
+
+<div class="post-block">
   
   
-  <div class="post-block">
-    <div class="post-content">
-      <div class="collection-title">
-        <h1 class="collection-header">ADB
-          <small>标签</small>
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="https://sxr1223.github.io/post/7ca365d3b3bb/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/black_souls_avatar.jpg">
+      <meta itemprop="name" content="sxr1223">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="sxr1223的小站">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110) | sxr1223的小站">
+      <meta itemprop="description" content="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)
         </h1>
-      </div>
 
-      
-    <div class="collection-year">
-      <span class="collection-header">2023</span>
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">发表于</span>
+
+      <time title="创建时间：2024-03-16 22:03:19" itemprop="dateCreated datePublished" datetime="2024-03-16T22:03:19+08:00">2024-03-16</time>
+    </span>
+
+  
+    <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv">
+      <span class="post-meta-item-icon">
+        <i class="far fa-eye"></i>
+      </span>
+      <span class="post-meta-item-text">阅读次数：</span>
+      <span id="busuanzi_value_page_pv"></span>
+    </span>
+    <span class="post-meta-break"></span>
+    <span class="post-meta-item" title="本文字数">
+      <span class="post-meta-item-icon">
+        <i class="far fa-file-word"></i>
+      </span>
+      <span class="post-meta-item-text">本文字数：</span>
+      <span>2.2k</span>
+    </span>
+    <span class="post-meta-item" title="阅读时长">
+      <span class="post-meta-item-icon">
+        <i class="far fa-clock"></i>
+      </span>
+      <span class="post-meta-item-text">阅读时长 &asymp;</span>
+      <span>2 分钟</span>
+    </span>
+</div>
+
+            <div class="post-description">PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)</div>
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h4 id="现象描述">现象描述</h4>
+<p>本人在使用 MES22GP_v1 开发板，也就是 Pangu 的 FPGA，尝试通过 PDS 调用 Modelsim 进行仿真。库编译正常，但是无法仿真，出现 vsim-12110 报错</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># do &#123;run_behav_simulate.tcl&#125;</span><br><span class="line"># vsim -novopt -L work -L usim -L adc -L ddrc -L ddrphy -L hsst_e2 -L iolhr_dft -L ipal_e1 -L pciegen2 tb_led_test usim.GTP_GRS </span><br><span class="line"># Start time: 11:14:14 on Feb 27,2024</span><br><span class="line"># ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User&#x27;s Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.</span><br><span class="line"># Error loading design</span><br><span class="line"># Error: Error loading design</span><br><span class="line">#        Pausing macro execution</span><br><span class="line"># MACRO ./run_behav_simulate.tcl PAUSED at line 6</span><br></pre></td></tr></table></figure>
+<h4 id="原因分析">原因分析</h4>
+<p>根据报错，不难发现是工程目录下的 <code>.\2_Demo\01_led_test\sim\behav\run_behav_simulate.tcl</code> 文件中出现了 <code>-novopt</code> 选项所导致的</p>
+<p>查阅资料可发现，该问题是由于 Modelsim 版本更新导致的。据说在 10.7 版本之前，Modelsim 支持 <code>-novopt</code> 选项，该选项可关闭 Modelsim 对于仿真文件的优化，防止错误的优化，导致端口丢失等问题。但从 10.7 版本开始，Modelsim 就不再支持该选项，仿真中一旦出现该选项将会产生报错，也就是 <code>vsim-12110</code>。新版本的 Modelsim 使用 <code>-voptargs=&quot;+acc&quot;</code> 选项代替 <code>-novopt</code> 选项</p>
+<h4 id="解决方案">解决方案</h4>
+<p>虽然看上去只需要把 <code>.\2_Demo\01_led_test\sim\behav\run_behav_simulate.tcl</code> 文件中的 <code>-novopt</code> 选项删除或者改为 <code>-novopt</code> 选项即可，但实际上每次从 PDS 启动仿真时都会重新生成这个文件，所以改了也白改<br>
+而 PDS 内我并未找到相关设置，只能作罢<br>
+有些地方说，可以把 Modelsim 安装目录下的 <code>Modelsim.ini</code> 中的 <code>VoptFlow=1</code> 改为 <code>VoptFlow=0</code>，亲测无效</p>
+<h5 id="方案一">方案一</h5>
+<p>直接无脑卸载 Modelsim 后安装低版本的 Modelsim</p>
+<h5 id="方案二">方案二</h5>
+<p>在 PDS 中，从 TB 文件上右键启动 Modelsim 仿真，Modelsim 仿真会报错。先不管报错，在 Modelsim 的 <code>Library</code> 选项卡内找到 <code>work</code> 库<br>
+库的名称是根据 <code>.\2_Demo\01_led_test\sim\behav\run_behav_compile.tcl</code> 文件内 <code>vlib work</code> 语句确定的<br>
+展开 <code>work</code> 库，可发现 TB 文件的顶层模块，右键，选择 <code>Simulate with full Optimization</code>，待结束后切换回 <code>Library</code> 界面，再次在 TB 文件的顶层模块上右键，选择 <code>Simulate</code><br>
+待仿真结束后，<code>Object</code> 窗口内就会出现各个信号，选中需要的信号，然后右键，选择 <code>Add Wave</code>，添加需要的信号到 <code>Wave</code> 窗口<br>
+但此时 <code>Wave</code> 窗口内的信号并没有数据，显示 <code>No-Data</code><br>
+接着在 <code>Transcript</code> 窗口内输入 <code>run &lt;run_sim_time&gt;</code>，比如仿真 50ms，为 <code>run 50ms</code>，待仿真结束后，<code>Wave</code> 窗口内就会出现信号的波形，这一步也可以由菜单栏或者工具栏的 <code>Simulate-&gt;Run All</code> 完成</p>
+<p>这个步骤还是比较复杂，应该可以写成一个 TCL 文件自动化处理，不过这个就得留待以后研究了</p>
+<h5 id="方案三">方案三</h5>
+<p>手动修改 <code>run_behav_simulate.tcl</code> 文件，不从 PDS 启动仿真，而是手动从 <code>2_Demo\01_led_test\sim\behav</code> 启动仿真</p>
+<p>首先从 PDS 启动一次仿真，会报错终止仿真，直接关闭即可。此处只是利用 PDS 创建 TCL 与批处理文件<br>
+然后手动修改 <code>run_behav_simulate.tcl</code> 文件，将其中 <code>-novopt</code> 的参数替换为 <code>-voptargs=&quot;+acc&quot;</code><br>
+最后双击 <code>run_behav.bat</code> 启动仿真即可</p>
+<h5 id="Quartus-中的解决方案">Quartus 中的解决方案</h5>
+<p>对于 Quartus，可以在 <code>Simulation Waveform Editor</code> 中的 <code>Simulation -&gt; Simulation Settings</code>，选择对应语言 (<code>S or SV</code>)，编辑 <code>Functional Simulation Settings</code> 和 <code>Timing Simulation Settings</code> 其中的 <code>ModelSim Script</code>，删除其中的 <code>-novopt</code></p>
+<h4 id="其他相关文章">其他相关文章</h4>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/lijun1217815/article/details/134645841">Modelsim编译、仿真报告关于novopt的错误（vlog-12110）_-novopt-CSDN博客</a></p>
+
     </div>
 
-  <article itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-      <div class="post-meta-container">
-        <time itemprop="dateCreated"
-              datetime="2023-11-26T23:29:37+08:00"
-              content="2023-11-26">
-          11-26
-        </time>
+    
+    
+    
+
+    <footer class="post-footer">
+          
+
+<div class="post-copyright">
+<ul>
+  <li class="post-copyright-author">
+      <strong>本文作者： </strong>sxr1223
+  </li>
+  <li class="post-copyright-link">
+      <strong>本文链接：</strong>
+      <a href="https://sxr1223.github.io/post/7ca365d3b3bb/" title="PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)">https://sxr1223.github.io/post/7ca365d3b3bb/</a>
+  </li>
+  <li class="post-copyright-license">
+      <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+          <div class="followme">
+  <span>欢迎关注我的其它发布渠道</span>
+
+  <div class="social-list">
+
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://github.com/sxr1223">
+            <span class="icon">
+              <i class="fab fa-github"></i>
+            </span>
+
+            <span class="label">Github</span>
+          </a>
       </div>
 
-      <div class="post-title">
-        <a class="post-title-link" href="/post/400420378f39/" itemprop="url">
-          <span itemprop="name">微信数据导出-ADB</span>
-        </a>
+      <div class="social-item">
+          <a target="_blank" class="social-link" href="https://space.bilibili.com/36345802">
+            <span class="icon">
+              <i class="fa-brands fa-bilibili"></i>
+            </span>
+
+            <span class="label">Bilibili</span>
+          </a>
       </div>
-
-      
-    </header>
-  </article>
-
-    </div>
   </div>
-  
-  
-  
+</div>
+
+          <div class="post-tags">
+              <a href="/tags/FPGA-tools-Modelsim/" rel="tag"><i class="fa fa-tag"></i> FPGA/tools/Modelsim</a>
+              <a href="/tags/FPGA-IC-Pangu/" rel="tag"><i class="fa fa-tag"></i> FPGA/IC/Pangu</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/post/7d43f2735452/" rel="prev" title="Modelsim的库管理与编译">
+                  <i class="fa fa-angle-left"></i> Modelsim的库管理与编译
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/post/1ac313ffec94/" rel="next" title="Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析）">
+                  Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析） <i class="fa fa-angle-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
 
 </div>
   </main>
