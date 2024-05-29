@@ -373,7 +373,7 @@ graph LR
   </entry>
   <entry>
     <title>Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析）</title>
-    <url>/post/1ac313ffec94/</url>
+    <url>/post/e71454bcd5ff/</url>
     <content><![CDATA[<p>此处介绍一种可以不必新建工程，快速进行仿真的方法，也是目前 <code>gowin</code> 和 <code>pango</code> 例程中使用的方法。其本质就是利用 <code>.bat</code> 批处理文件启动 Modelsim，然后再利用 <code>tcl</code> 文件（<code>gowin</code> 使用 <code>.do</code> 文件）将编译、仿真等操作自动化，从而节省操作</p>
 <h4 id="bat-文件"><code>.bat</code> 文件</h4>
 <p>基本上都是调用 Modelsim，然后使用 <code>-do</code> 参数执行 TCL 脚本，其参数可为单个 TCL 文件（<code>gowin</code> 仿真例程），或者是一行在 <code>Transcript</code> 中执行的指令</p>
@@ -401,7 +401,8 @@ PDS 这种仿真的优点是不会重复编译库文件，工程中不需要携�
 <h5 id="gowin-仿真例程-2"><code>gowin</code> 仿真例程</h5>
 <p><code>gowin</code> 仿真比较直接，每个工程都包含了对应器件的未编译库文件，也就是 <code>xxxx\tb\prim_sim.v</code> 文件（所以从示例工程中直接复制仿真相关文件可能导致器件不同而导致仿真出错，千万记得修改）</p>
 <p>原始版本基本与 <code>pango</code> 仿真相同，也需要将 <code>-novopt</code> 选项更换为 <code>-voptargs=&quot;+acc&quot;</code>，只不过 <code>gowin</code> 是二合一，并且每次都重新编译库文件</p>
-<p>下面是我修改版本，使用预先编译好的库，并且在 <code>vlog</code> 中使用 <code>-f</code> 参数指定需要编译的文件</p>
+<p>下面是我修改版本，使用预先编译好的库，并且在 <code>vlog</code> 中使用 <code>-f</code> 参数指定需要编译的文件<br>
+顺带一提，<code>gowin</code> 库文件的源文件在 <code>Gowin\IDE\simlib</code> 下</p>
 <figure class="highlight tcl"><table><tr><td class="code"><pre><span class="line"><span class="comment"># cmd.do</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## part 1: new lib</span></span><br><span class="line">vlib work</span><br><span class="line">vmap work work</span><br><span class="line"></span><br><span class="line"><span class="comment">## part 2: load design</span></span><br><span class="line"><span class="comment"># vlog -sv -incr -work work &quot;../tb/prim_sim.v&quot;</span></span><br><span class="line">vlog -sv -L gowin_gw1n -L work +incdir+../tb -work work <span class="string">&quot;../tb/tb.v&quot;</span></span><br><span class="line">vlog -sv -L gowin_gw1n -L work +incdir+../src/ -<span class="keyword">incr</span> -work work -f <span class="string">&quot;../vflist.txt&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## part 3: sim design</span></span><br><span class="line">vsim -L gowin_gw1n -L work work.tb -voptargs=<span class="string">&quot;+acc&quot;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">## part 4: add signals</span></span><br><span class="line"><span class="comment"># add wave -group &quot;group_name&quot; &#123;sim:/tb/xxx_test_tb/*&#125;</span></span><br><span class="line">add wave -position insertpoint sim:/tb/xxx_test_tb/xxxx</span><br><span class="line"></span><br><span class="line"><span class="comment">## part 5: show ui </span></span><br><span class="line">view wave</span><br><span class="line">view structure</span><br><span class="line">view signals</span><br><span class="line"></span><br><span class="line"><span class="comment">## part 6: run </span></span><br><span class="line">run <span class="number">0.5</span>ms</span><br></pre></td></tr></table></figure>
 <h4 id="关于禁止仿真优化">关于禁止仿真优化</h4>
 <p>仿真中的优化是在 <code>Simulate-&gt;Start Simulation</code> 中勾选 <code>Optimization</code> 中的 <code>Enable optimization</code>，然后点击 <code>Optimization Options...</code>，在其中的 <code>Visiblity</code> 选项卡，选中 <code>Apply full visibility to all modules(full debug mode)</code> 选项，就是禁用仿真中的优化。其实相当于在 <code>vsim</code> 仿真指令中加入 <code>-voptargs=&quot;+acc&quot;</code> 选项</p>
@@ -410,11 +411,12 @@ PDS 这种仿真的优点是不会重复编译库文件，工程中不需要携�
       <tags>
         <tag>FPGA/tools/Modelsim</tag>
         <tag>FPGA/IC/Pango</tag>
+        <tag>FPGA/IC/gowin</tag>
       </tags>
   </entry>
   <entry>
-    <title>Modelsim的库管理与编译</title>
-    <url>/post/7d43f2735452/</url>
+    <title>Modelsim 的库管理与编译</title>
+    <url>/post/1cb831d3e25a/</url>
     <content><![CDATA[<p>库的管理建议使用 GUI，操作简便，没必要上 CLI，比修改 <code>Modelsim.ini</code> 简单易行。除非是需要反复执行的操作，否则不建议用 CLI</p>
 <h4 id="库的新建">库的新建</h4>
 <p>启动 Modelsim 后，在 <code>Library</code> 窗口内 <code>右键-&gt;New-&gt;Library...</code> 即可新建一个库<br>
@@ -437,12 +439,11 @@ PDS 这种仿真的优点是不会重复编译库文件，工程中不需要携�
 ]]></content>
       <tags>
         <tag>FPGA/tools/Modelsim</tag>
-        <tag>FPGA/IC/Pangu</tag>
       </tags>
   </entry>
   <entry>
     <title>PDS联合Modelsim仿真中的-novopt报错问题 (vsim-12110)</title>
-    <url>/post/7ca365d3b3bb/</url>
+    <url>/post/c82d5d5441d0/</url>
     <content><![CDATA[<h4 id="现象描述">现象描述</h4>
 <p>本人在使用 MES22GP_v1 开发板，也就是 Pangu 的 FPGA，尝试通过 PDS 调用 Modelsim 进行仿真。库编译正常，但是无法仿真，出现 vsim-12110 报错</p>
 <figure class="highlight plaintext"><table><tr><td class="code"><pre><span class="line"># do &#123;run_behav_simulate.tcl&#125;</span><br><span class="line"># vsim -novopt -L work -L usim -L adc -L ddrc -L ddrphy -L hsst_e2 -L iolhr_dft -L ipal_e1 -L pciegen2 tb_led_test usim.GTP_GRS </span><br><span class="line"># Start time: 11:14:14 on Feb 27,2024</span><br><span class="line"># ** Error (suppressible): (vsim-12110) All optimizations are disabled because the -novopt option is in effect. This will cause your simulation to run very slowly. If you are using this switch to preserve visibility for Debug or PLI features, please see the User&#x27;s Manual section on Preserving Object Visibility with vopt. -novopt option is now deprecated and will be removed in future releases.</span><br><span class="line"># Error loading design</span><br><span class="line"># Error: Error loading design</span><br><span class="line">#        Pausing macro execution</span><br><span class="line"># MACRO ./run_behav_simulate.tcl PAUSED at line 6</span><br></pre></td></tr></table></figure>
@@ -475,7 +476,57 @@ PDS 这种仿真的优点是不会重复编译库文件，工程中不需要携�
 ]]></content>
       <tags>
         <tag>FPGA/tools/Modelsim</tag>
-        <tag>FPGA/IC/Pangu</tag>
+        <tag>FPGA/IC/Pango</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>Ansys Q3D PCB 寄生参数提取</title>
+    <url>/post/8c7e52219339/</url>
+    <content><![CDATA[<h2 id="简介">简介</h2>
+<p>Ansys Q3D 一般用于 PCB 寄生参数提取。</p>
+<h2 id="操作">操作</h2>
+<h3 id="AD-导出">AD 导出</h3>
+<p>一般比较常用的是使用 AD 的 <code>Ansys EDB</code> 插件导出为 <code>.edb</code> 文件。但经我测试，使用 <code>Ansoft Neutral</code> 导出为 <code>.anf</code> 文件也可使用。</p>
+<h4 id="导出为-anf-文件">导出为 <code>.anf</code> 文件</h4>
+<p>导出为 <code>.anf</code> 文件最大的好处是不需要额外安装插件，只要在 AD 安装时勾选了 <code>Importers\Exporters -&gt; Ansoft</code>，就会自动安装好插件，无需再次配置。如果安装时未勾选该选项，就需要参考 <a href="#%E5%AF%BC%E5%87%BA%E4%B8%BA%60.edb%60%E6%96%87%E4%BB%B6">导出为<code>.edb</code>文件</a> 中的介绍安装插件，之后再按本节内容操作。</p>
+<p>在 AD 中打开需要提取寄生参数的 PCB 文件，选择 <code>File-&gt;Export-&gt;Ansoft Neutral</code> 进行导出，然后选择导出文件保存位置，最后弹出的 <code>Ansoft Export</code> 窗口保持默认设置，点 <code>OK</code> 即可。</p>
+<h4 id="导出为-edb-文件">导出为 <code>.edb</code> 文件</h4>
+<p>导出为 <code>.edb</code> 文件需要使用 AD 的 <code>Ansys EDB</code> 插件，一般都需要手动安装。</p>
+<h5 id="AD-在线安装插件">AD 在线安装插件</h5>
+<p>该方法适用于没有 AD 安装包的情况。</p>
+<p>首先在 <a href="https://www.altium.com/">AD官网</a> 注册账号，可随意使用任何邮箱，不必是教育或者公司邮箱。</p>
+<p>然后在 AD 中打开需要提取寄生参数的 PCB 文件，点击 <code>Tools-&gt;Preferences</code> 或者右上角的小齿轮或者在 PCB 任意处 <code>右键-&gt;Preferences</code> 打开 AD 的 <code>Preferences</code> 界面，在 <code>System-&gt;Account Management</code> 页内，<code>Altimu Connections</code> 栏选 <code>Yes, I would...</code>，<code>Account Sign in</code> 栏填入账号密码，<code>Altium Account Management Servers</code> 栏填 <code>portal365.altium.com</code>，设置完毕后点 <code>Apply</code> 即可在 AD 内登录账号。顺便在 <code>System-&gt;Installation</code> 页内，<code>Automatic checking</code> 栏内选 <code>Global Installation Servers</code>。<br>
+这一步如果操作正确，那么在 AD 右上角的头像处就会显示 <code>Not Connected</code> 或者 <code>Altium 365</code> 之类的。如果显示 <code>Not Signed in</code> 则代表尚未登陆，可点击头像 <code>Not Signed in</code> 手动登录。</p>
+<p>之后，点击右上角的头像，选择 <code>Extensions and Updates</code> 安装插件。在 <code>Purchased</code> 页内的 <code>Software Extensions</code> 选择要安装的插件，即 <code>Ansys EDB</code>，进行安装。</p>
+<h5 id="AD-离线安装插件">AD 离线安装插件</h5>
+<p>该方法适用于有 AD 安装包的情况。</p>
+<p>首先将 AD 的安装包解压到任意位置。</p>
+<p>然后在 AD 中打开需要提取寄生参数的 PCB 文件，点击 <code>Tools-&gt;Preferences</code> 或者右上角的小齿轮或者在 PCB 任意处 <code>右键-&gt;Preferences</code> 打开 AD 的 <code>Preferences</code> 界面，在 <code>System-&gt;Installation</code> 页内，<code>Automatic checking</code> 栏内选 <code>Offline Installation</code>，并填入 AD 安装包解压后的位置。</p>
+<p>之后，点击右上角的头像，选择 <code>Extensions and Updates</code> 安装插件。在 <code>Purchased</code> 页内的 <code>Software Extensions</code> 选择要安装的插件，即 <code>Ansys EDB</code>，进行安装。</p>
+<h5 id="导出文件">导出文件</h5>
+<p>与导出为 <code>.anf</code> 文件非常相似，在 AD 中打开需要提取寄生参数的 PCB 文件，选择 <code>File-&gt;Export-&gt;Ansys EDB</code> 进行导出，然后选择导出文件保存位置，最后弹出的 <code>Ansys EDB Export Options</code> 窗口保持默认设置，点 <code>OK</code> 即可。</p>
+<h3 id="Ansys-SIwave-处理"><code>Ansys SIwave</code> 处理</h3>
+<p>启动 <code>Ansys SIwave</code> ，不必新建工程，直接从 <code>Import</code> 栏内选 <code>Ansys EDB...</code> 或者 <code>ANF...</code> 导入相应的文件。注意，AD 导出的 <code>.ebd</code> 文件是保存在 <code>&lt;project_name&gt;.edb</code> 文件夹内的 <code>edb.def</code> 文件，从 <code>Ansys SIwave</code> 导入时需要选中 <code>&lt;project_name&gt;.edb</code> 文件夹才能正确导入。</p>
+<p>导入后，会弹出 <code>Select nets to import from main</code> 窗口，勾选需要导入的网络后点击 <code>Import Configuration</code> 即可导入到 <code>Ansys SIwave</code> 中。</p>
+<p>接着，在 <code>Ansys SIwave</code> 左侧的 <code>Signal</code> 页内勾选所需的信号，选中的网络会在其下方的 <code>Selected Nets</code> 内显示。</p>
+<p>最后，保存当前的 <code>SIwave</code> 工程，在上方的 <code>Export</code> 内选择 <code>Export to Q3D Extractor...</code>，在弹出的 <code>Export Q3D Project</code> 界面，勾选 <code>Capacitance</code>、<code>DC Inductance/Resistance</code>、<code>DC Resistance</code> 和 <code>AC Inductance/Resistance</code> 选项即可。</p>
+<h3 id="Ansys-Electronics-Desktop-仿真"><code>Ansys Electronics Desktop</code> 仿真</h3>
+<p>使用 <code>Ansys Electronics Desktop</code> 打开 <code>Ansys SIwave</code> 导出的 <code>.aedt</code> 文件，可看到 PCB 的模型，其中包括之前选中网络的铜箔、过孔通孔、基板与过孔填充材料。<code>copper</code> 材质的为铜箔和过孔通孔；<code>FR4_epoxy</code> 为基板材料，一般都是 <code>FR4</code>；<code>solder</code> 为贴片元件焊盘。一般基板与贴片元件焊盘影响不大，可直接删除 <code>FR4_epoxy</code> 和 <code>solder</code> 材料下的模型。并且，如果不删除 <code>solder</code> 下的模型，仿真报错 <code>Terminal 'xxx': Terminal should be assigned on conductors </code> 与 <code>Terminal 'xxx': Terminal is in the wrong net</code>；执行 <code>Auto Identify Nets</code> 后会在每个贴片元件焊盘自动生成一个 <code>Current Source</code> 与 <code>Current Sink</code>，这一般都是错误的，仿真也会报错。</p>
+<p>接着要对铜箔进行连接，某些走线虽然是相同网络，但可能并不相连。这时就需要手动绘制一些长方体将这些孤立的铜箔相连。当然，如果不影响参数提取，也可不手动连接，也可直接删除。</p>
+<p>之后设置 <code>Current Source</code> 与 <code>Current Sink</code>。一个网络上只能有一个 <code>Current Sink</code>，但可有多个 <code>Current Source</code>。按 <code>F</code> 切换到 <code>Face</code>，选中一个面，<code>右键-&gt;Assign Exaction-&gt;Sink</code> 或者 <code>右键-&gt;Assign Exaction-&gt;Source</code> 即可。</p>
+<p>为防止网络设置有错误，可在模型的任意位置 <code>右键-&gt;Auto Identify Nets</code> 自动划分网络。这一步并不必要，有时不进行也不会报错，但如果无法仿真不妨尝试一下。</p>
+<p>然后配置仿真设置。在 <code>Project Manager</code> 窗口内的 <code>Analysis</code> 上 <code>右键-&gt;Add Solution Setup...</code> 添加一个仿真设置。一般只需修改 <code>General</code> 中的 <code>Solution Frequency</code>。</p>
+<p>如果需要对不同频率下的电路进行仿真，可在特定的仿真设置，比如 <code>Setup1</code> 上，<code>右键-&gt;Add Frequency Sweep</code> 添加扫频。</p>
+<p>最后，在 <code>Project Manager</code> 窗口内的 <code>Analysis</code> 上 <code>右键-&gt;Analysis All</code> 运行仿真。仿真结束后，在 <code>Project Manager</code> 窗口内的 <code>Results</code> 上 <code>右键-&gt;Solution Data</code>。在 <code>Solution: main - Q3DModel</code> 窗口内，将右侧的 <code>CG</code> 改为 <code>AC RL</code> 下方就会显示寄生电阻和电感。</p>
+<p>也可在 <code>Field Overlays</code> 中选择 <code>AC R/L Fields</code> 中的 <code>SubfaceJac</code>，即可视化表面电流密度。</p>
+<h2 id="杂谈">杂谈</h2>
+<p>貌似 PCB 文件中有中文会导致仿真失败。为保证无中文，可新建一个 PCB，将需要提取寄生参数的网络复制到新 PCB 中。</p>
+<h2 id="相关文章">相关文章</h2>
+<p><a href="https://blog.csdn.net/hu706789355/article/details/134407524">Q3D对PCB电路板寄生参数提取，RLC_q3d提取寄生参数-CSDN博客</a><br>
+<a href="https://blog.csdn.net/weixin_46413772/article/details/137653876">用ansys q3d提取pcb板上的寄生参数及注意事项_ansys仿真寄生参数-CSDN博客</a></p>
+]]></content>
+      <tags>
+        <tag>电路/仿真软件/Ansys</tag>
       </tags>
   </entry>
 </search>

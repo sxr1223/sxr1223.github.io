@@ -21,35 +21,28 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"sxr1223.github.io","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.18.2","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"mac"},"fold":{"enable":false,"height":500},"bookmark":{"enable":true,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"搜索...","empty":"没有找到任何搜索结果：${query}","hits_time":"找到 ${hits} 个搜索结果（用时 ${time} 毫秒）","hits":"找到 ${hits} 个搜索结果"},"path":"/search.xml","localsearch":{"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="CC知识分享协议">
+    <meta name="description" content="Ansys Q3D PCB 寄生参数提取">
 <meta property="og:type" content="article">
-<meta property="og:title" content="CC知识分享协议">
-<meta property="og:url" content="https://sxr1223.github.io/post/69ecce42380b/">
+<meta property="og:title" content="Ansys Q3D PCB 寄生参数提取">
+<meta property="og:url" content="https://sxr1223.github.io/post/8c7e52219339/">
 <meta property="og:site_name" content="sxr1223的小站">
-<meta property="og:description" content="CC知识分享协议">
+<meta property="og:description" content="Ansys Q3D PCB 寄生参数提取">
 <meta property="og:locale" content="zh_CN">
-<meta property="og:image" content="https://sxr1223.github.io/post/images/e7a2dcb82579119a55bfa12f40dc37ed_r.png">
-<meta property="og:image" content="https://sxr1223.github.io/post/images/Pasted%20image%2020231121192407.png">
-<meta property="og:image" content="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1">
-<meta property="og:image" content="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1">
-<meta property="og:image" content="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1">
-<meta property="og:image" content="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1">
-<meta property="article:published_time" content="2023-11-26T15:29:37.914Z">
-<meta property="article:modified_time" content="2023-11-25T07:52:06.858Z">
+<meta property="article:published_time" content="2024-05-29T13:51:21.675Z">
+<meta property="article:modified_time" content="2024-05-29T13:51:21.675Z">
 <meta property="article:author" content="sxr1223">
-<meta property="article:tag" content="开源协议">
+<meta property="article:tag" content="电路&#x2F;仿真软件&#x2F;Ansys">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://sxr1223.github.io/post/images/e7a2dcb82579119a55bfa12f40dc37ed_r.png">
 
 
-<link rel="canonical" href="https://sxr1223.github.io/post/69ecce42380b/">
+<link rel="canonical" href="https://sxr1223.github.io/post/8c7e52219339/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sxr1223.github.io/post/69ecce42380b/","path":"post/69ecce42380b/","title":"CC知识分享协议"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"zh-CN","comments":true,"permalink":"https://sxr1223.github.io/post/8c7e52219339/","path":"post/8c7e52219339/","title":"Ansys Q3D PCB 寄生参数提取"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>CC知识分享协议 | sxr1223的小站</title>
+<title>Ansys Q3D PCB 寄生参数提取 | sxr1223的小站</title>
   
 
 
@@ -149,7 +142,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8D%8F%E8%AE%AE%E4%BB%8B%E7%BB%8D"><span class="nav-text">协议介绍</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E4%B8%8D%E5%90%8C%E8%A7%84%E6%A0%BC"><span class="nav-text">不同规格</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#BY"><span class="nav-text">BY</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#NC"><span class="nav-text">NC</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#ND"><span class="nav-text">ND</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#SA"><span class="nav-text">SA</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#PDM"><span class="nav-text">PDM</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CC0"><span class="nav-text">CC0</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%A6%82%E4%BD%95%E5%A3%B0%E6%98%8E"><span class="nav-text">如何声明</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B3%E4%BA%8E%E6%96%87%E7%AB%A0%E7%B4%A0%E6%9D%90"><span class="nav-text">关于文章素材</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9C%AC%E9%97%B4%E7%9A%84%E5%85%BC%E5%AE%B9"><span class="nav-text">版本间的兼容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%85%B6%E4%BB%96%E5%8D%8F%E8%AE%AE%E5%85%BC%E5%AE%B9%E6%80%A7"><span class="nav-text">其他协议兼容性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%89%88%E6%9D%83%E4%BF%A1%E6%81%AF"><span class="nav-text">版权信息</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%AE%80%E4%BB%8B"><span class="nav-text">简介</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%93%8D%E4%BD%9C"><span class="nav-text">操作</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AD-%E5%AF%BC%E5%87%BA"><span class="nav-text">AD 导出</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E4%B8%BA-anf-%E6%96%87%E4%BB%B6"><span class="nav-text">导出为 .anf 文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E4%B8%BA-edb-%E6%96%87%E4%BB%B6"><span class="nav-text">导出为 .edb 文件</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#AD-%E5%9C%A8%E7%BA%BF%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-text">AD 在线安装插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#AD-%E7%A6%BB%E7%BA%BF%E5%AE%89%E8%A3%85%E6%8F%92%E4%BB%B6"><span class="nav-text">AD 离线安装插件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#%E5%AF%BC%E5%87%BA%E6%96%87%E4%BB%B6"><span class="nav-text">导出文件</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansys-SIwave-%E5%A4%84%E7%90%86"><span class="nav-text">Ansys SIwave 处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ansys-Electronics-Desktop-%E4%BB%BF%E7%9C%9F"><span class="nav-text">Ansys Electronics Desktop 仿真</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%9D%82%E8%B0%88"><span class="nav-text">杂谈</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%9B%B8%E5%85%B3%E6%96%87%E7%AB%A0"><span class="nav-text">相关文章</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -210,7 +203,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="https://sxr1223.github.io/post/69ecce42380b/">
+    <link itemprop="mainEntityOfPage" href="https://sxr1223.github.io/post/8c7e52219339/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar001_N.P.C._Dreams.jpg">
@@ -223,12 +216,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="CC知识分享协议 | sxr1223的小站">
-      <meta itemprop="description" content="CC知识分享协议">
+      <meta itemprop="name" content="Ansys Q3D PCB 寄生参数提取 | sxr1223的小站">
+      <meta itemprop="description" content="Ansys Q3D PCB 寄生参数提取">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          CC知识分享协议
+          Ansys Q3D PCB 寄生参数提取
         </h1>
 
         <div class="post-meta-container">
@@ -239,23 +232,7 @@
       </span>
       <span class="post-meta-item-text">发表于</span>
 
-      <time title="创建时间：2023-11-26 23:29:37" itemprop="dateCreated datePublished" datetime="2023-11-26T23:29:37+08:00">2023-11-26</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">更新于</span>
-      <time title="修改时间：2023-11-25 15:52:06" itemprop="dateModified" datetime="2023-11-25T15:52:06+08:00">2023-11-25</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-folder"></i>
-      </span>
-      <span class="post-meta-item-text">分类于</span>
-        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-          <a href="/categories/%E6%9D%82%E9%A1%B9/" itemprop="url" rel="index"><span itemprop="name">杂项</span></a>
-        </span>
+      <time title="创建时间：2024-05-29 21:51:21" itemprop="dateCreated datePublished" datetime="2024-05-29T21:51:21+08:00">2024-05-29</time>
     </span>
 
   
@@ -272,90 +249,66 @@
         <i class="far fa-file-word"></i>
       </span>
       <span class="post-meta-item-text">本文字数：</span>
-      <span>2.1k</span>
+      <span>3.2k</span>
     </span>
     <span class="post-meta-item" title="阅读时长">
       <span class="post-meta-item-icon">
         <i class="far fa-clock"></i>
       </span>
       <span class="post-meta-item-text">阅读时长 &asymp;</span>
-      <span>2 分钟</span>
+      <span>3 分钟</span>
     </span>
 </div>
 
-            <div class="post-description">CC知识分享协议</div>
+            <div class="post-description">Ansys Q3D PCB 寄生参数提取</div>
         </div>
       </header>
 
     
     
     
-    <div class="post-body" itemprop="articleBody"><h4 id="协议介绍">协议介绍</h4>
-<p>知识共享 (Creative Commons) 协议，俗称 CC 协议，它包含多个属性，可根据需求进行组合后声明版权<br>
-CC 协议有 1.0, 2.0, 2.5, 3.0, 4.0 版本，建议选择的时候直接选最新的 4.0 版本</p>
-<p>原则上适用于全世界范围<br>
-协议启动后可以撤回，但是在协议存续期间签发出去的授权将继续有效，不能撤销已经发布出去的授权</p>
-<p>主动宣告他人在协议限定范围内的分享行为可以不向作者告知。分享行为包括：网络上的发表、转载、二次发布，实体中的转载、印刷、使用、展览等，一般而言，这些行为概括为“转载”、“使用”、“二次演绎”三种形式。<br>
-主动宣告不允许的使用行为。包括：商业性使用 (NC)、二次创作 (ND)、改变授权方式 (SA) 的再次分享</p>
-<p>虽然这么说，但 CC 协议在国内只能算“君子协议”，目前在 CC 协议在中国知名度不高，直到 2021 年才出现首次依据 GPL 协议判罚，CC 协议至今还未出现</p>
-<blockquote>
-<p>CC 协议是基于国际法、国际惯例、美国法律撰写的基础版本（即国际版），为适应各国不同的版权政策，一般都需要进行本地化。中国大陆地区对 CC 3.0 协议进行了本地化，以适合中国地区的法律，这也是目前中国最新版本的 CC 协议。根据 CC 组织的说法，4.0 版本在最大程度上实现了在各司法区的适用，从 4.0 版本起，CC 协议可以不必等待各司法区的知识共享组织进行本地化，可以直接使用。目前，在 4.0 版协议发布后，3.0 的中文版就从 CC 官网上消失了，4.0 则还未本地化。</p>
-</blockquote>
-<blockquote></blockquote>
-<blockquote>
-<p><em>摘自 <a target="_blank" rel="noopener" href="https://www.bilibili.com/read/cv2536622/">为什么你没授权就能用大大的作品？？—“知识共享”（CC协议）简单介绍 - 哔哩哔哩</a></em></p>
-</blockquote>
-<h4 id="不同规格">不同规格</h4>
-<h5 id="BY">BY</h5>
-<p>署名 (Attribution)<br>
-使用你的作品的人必须给出适当的署名，提供指向对应 CC 协议的链接，同时标明是否（对原始作品）作了修改</p>
-<h5 id="NC">NC</h5>
-<p>非商业性使用 (NonCommercial)<br>
-他人不可将你的作品用于商业目的</p>
-<h5 id="ND">ND</h5>
-<p>禁止演绎 (NoDerivatives)<br>
-如果他人再混合、转换、或者基于你的作品创作，那么他不可以分发修改后的作品</p>
-<h5 id="SA">SA</h5>
-<p>相同方式共享 (ShareAlike)<br>
-如果他人再混合、转换、或者基于你的作品创作，那么他必须基于与原先许可协议相同的许可协议分发修改后的作品</p>
-<h5 id="PDM">PDM</h5>
-<p>公有领域标志 (public domain mark)<br>
-标记某一作品没有著作权，可以由任何人使用。典型对象包括著作权过期的古老作品、或者不构成作品的内容</p>
-<h5 id="CC0">CC0</h5>
-<blockquote>
-<p>CC0 只代表作者放弃作品的著作权，但对于作品中涉及的肖像权、物权、商标权和专利权等其它权利，没有要求放弃，CC0 协议亦不会审查该部分内容的权利人<br>
-CC0 规定，只有真正的作者才能放弃作品版权</p>
-<p>我国《著作权法》规定，作品的署名权、修改权等著作人身权利由作者专属享有，是不能放弃和转让的，所以即使 CC0 协议声明放弃一切权利，在中国由于著作人身权不可放弃，即使作品签署了 CC0 协议，也依然有侵权的风险，特别是如果起诉的话，大概率会被法院判定“放弃版权”无效，而判决使用者侵权</p>
-<p><em>本段出处已不可考</em></p>
-</blockquote>
-<h4 id="如何声明">如何声明</h4>
-<p>可以使用这个网站在线生成：<a target="_blank" rel="noopener" href="https://chooser-beta.creativecommons.org/">Choose a License</a>，跟随指引选择协议规格，填写作品相关信息后即可自动生成代码。将响应代码插入文章即可<br>
-如果作品是文件的话，也可以仿照 git repo，在根目录下放置 LICENSE.txt 文件，文件内写上具体的协议内容。c 纯文本的协议内容在：<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by/4.0/legalcode.txt">creativecommons.org/licenses/by/4.0/legalcode.txt</a></p>
-<h4 id="关于文章素材">关于文章素材</h4>
-<p>使用 CC 协议声明版权的前提是确实拥有这篇文章的版权。<br>
-如果引用了采用 CC 协议声明版权的文章或者素材，需要注意协议间的兼容性。<br>
-下图为素材的兼容性关系，以对角线为轴对称，行和列的意义可互换，打勾代表这两类协议的素材可同时在一篇文章内使用<br>
-<img src="/post/images/e7a2dcb82579119a55bfa12f40dc37ed_r.png" alt="" loading="lazy"></p>
-<p>混合后的文章可采用的协议如下：<br>
-<img src="/post/images/Pasted%20image%2020231121192407.png" alt="" loading="lazy"></p>
-<p>表格中绿色的是可以使用的协议；标有黄色的是技术层面上可行，但是官方不推荐的用法；灰色的是不能使用的协议<br>
-PD = Dedicated to or marked as being in the public domain via one of our <a target="_blank" rel="noopener" href="https://creativecommons.org/publicdomain">public domain tools</a>, or other public domain material; adaptations of materials in the public domain may be built upon and licensed by the creator under any license terms desired.</p>
-<h4 id="版本间的兼容">版本间的兼容</h4>
-<p>版本间转化关系如下，未说明的即为不可转化<br>
-参见 <a target="_blank" rel="noopener" href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
-<ul>
-<li>1.0 可转为 1.0</li>
-<li>2.0 可转为 2.0, 2.5, 3.0, 4.0</li>
-<li>2.5 可转为 2.5, 3.0, 4.0</li>
-<li>3.0 可转为 3.0, 4.0</li>
-<li>4.0 可转为 4.0</li>
-</ul>
-<h4 id="其他协议兼容性">其他协议兼容性</h4>
-<p>包含 BY-SA 4.0 许可的素材的文章，只能采用 Free Art License 或者 GPLv3 声明<br>
-参见 <a target="_blank" rel="noopener" href="https://creativecommons.org/share-your-work/licensing-considerations/compatible-licenses/">Compatible Licenses - Creative Commons</a></p>
-<h4 id="版权信息">版权信息</h4>
-<p>本文中的图片摘自 <a target="_blank" rel="noopener" href="https://creativecommons.org/faq/">Frequently Asked Questions - Creative Commons</a></p>
-<p xmlns:cc="http://creativecommons.org/ns#" xmlns:dct="http://purl.org/dc/terms/"><a property="dct:title" rel="cc:attributionURL noopener" target="_blank" href="https://space.bilibili.com/36345802/article">This passage</a> by <a rel="cc:attributionURL dct:creator noopener" property="cc:attributionName" target="_blank" href="https://github.com/sxr1223/">sxr1223</a> is licensed under <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/?ref=chooser-v1" target="_blank" rel="license noopener noreferrer" style="display:inline-block;">CC BY-NC-SA 4.0<img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/cc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/by.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/nc.svg?ref=chooser-v1"><img style="height:22px!important;margin-left:3px;vertical-align:text-bottom;" src="https://mirrors.creativecommons.org/presskit/icons/sa.svg?ref=chooser-v1"></a></p>
+    <div class="post-body" itemprop="articleBody"><h2 id="简介">简介</h2>
+<p>Ansys Q3D 一般用于 PCB 寄生参数提取。</p>
+<h2 id="操作">操作</h2>
+<h3 id="AD-导出">AD 导出</h3>
+<p>一般比较常用的是使用 AD 的 <code>Ansys EDB</code> 插件导出为 <code>.edb</code> 文件。但经我测试，使用 <code>Ansoft Neutral</code> 导出为 <code>.anf</code> 文件也可使用。</p>
+<h4 id="导出为-anf-文件">导出为 <code>.anf</code> 文件</h4>
+<p>导出为 <code>.anf</code> 文件最大的好处是不需要额外安装插件，只要在 AD 安装时勾选了 <code>Importers\Exporters -&gt; Ansoft</code>，就会自动安装好插件，无需再次配置。如果安装时未勾选该选项，就需要参考 <a href="#%E5%AF%BC%E5%87%BA%E4%B8%BA%60.edb%60%E6%96%87%E4%BB%B6">导出为<code>.edb</code>文件</a> 中的介绍安装插件，之后再按本节内容操作。</p>
+<p>在 AD 中打开需要提取寄生参数的 PCB 文件，选择 <code>File-&gt;Export-&gt;Ansoft Neutral</code> 进行导出，然后选择导出文件保存位置，最后弹出的 <code>Ansoft Export</code> 窗口保持默认设置，点 <code>OK</code> 即可。</p>
+<h4 id="导出为-edb-文件">导出为 <code>.edb</code> 文件</h4>
+<p>导出为 <code>.edb</code> 文件需要使用 AD 的 <code>Ansys EDB</code> 插件，一般都需要手动安装。</p>
+<h5 id="AD-在线安装插件">AD 在线安装插件</h5>
+<p>该方法适用于没有 AD 安装包的情况。</p>
+<p>首先在 <a target="_blank" rel="noopener" href="https://www.altium.com/">AD官网</a> 注册账号，可随意使用任何邮箱，不必是教育或者公司邮箱。</p>
+<p>然后在 AD 中打开需要提取寄生参数的 PCB 文件，点击 <code>Tools-&gt;Preferences</code> 或者右上角的小齿轮或者在 PCB 任意处 <code>右键-&gt;Preferences</code> 打开 AD 的 <code>Preferences</code> 界面，在 <code>System-&gt;Account Management</code> 页内，<code>Altimu Connections</code> 栏选 <code>Yes, I would...</code>，<code>Account Sign in</code> 栏填入账号密码，<code>Altium Account Management Servers</code> 栏填 <code>portal365.altium.com</code>，设置完毕后点 <code>Apply</code> 即可在 AD 内登录账号。顺便在 <code>System-&gt;Installation</code> 页内，<code>Automatic checking</code> 栏内选 <code>Global Installation Servers</code>。<br>
+这一步如果操作正确，那么在 AD 右上角的头像处就会显示 <code>Not Connected</code> 或者 <code>Altium 365</code> 之类的。如果显示 <code>Not Signed in</code> 则代表尚未登陆，可点击头像 <code>Not Signed in</code> 手动登录。</p>
+<p>之后，点击右上角的头像，选择 <code>Extensions and Updates</code> 安装插件。在 <code>Purchased</code> 页内的 <code>Software Extensions</code> 选择要安装的插件，即 <code>Ansys EDB</code>，进行安装。</p>
+<h5 id="AD-离线安装插件">AD 离线安装插件</h5>
+<p>该方法适用于有 AD 安装包的情况。</p>
+<p>首先将 AD 的安装包解压到任意位置。</p>
+<p>然后在 AD 中打开需要提取寄生参数的 PCB 文件，点击 <code>Tools-&gt;Preferences</code> 或者右上角的小齿轮或者在 PCB 任意处 <code>右键-&gt;Preferences</code> 打开 AD 的 <code>Preferences</code> 界面，在 <code>System-&gt;Installation</code> 页内，<code>Automatic checking</code> 栏内选 <code>Offline Installation</code>，并填入 AD 安装包解压后的位置。</p>
+<p>之后，点击右上角的头像，选择 <code>Extensions and Updates</code> 安装插件。在 <code>Purchased</code> 页内的 <code>Software Extensions</code> 选择要安装的插件，即 <code>Ansys EDB</code>，进行安装。</p>
+<h5 id="导出文件">导出文件</h5>
+<p>与导出为 <code>.anf</code> 文件非常相似，在 AD 中打开需要提取寄生参数的 PCB 文件，选择 <code>File-&gt;Export-&gt;Ansys EDB</code> 进行导出，然后选择导出文件保存位置，最后弹出的 <code>Ansys EDB Export Options</code> 窗口保持默认设置，点 <code>OK</code> 即可。</p>
+<h3 id="Ansys-SIwave-处理"><code>Ansys SIwave</code> 处理</h3>
+<p>启动 <code>Ansys SIwave</code> ，不必新建工程，直接从 <code>Import</code> 栏内选 <code>Ansys EDB...</code> 或者 <code>ANF...</code> 导入相应的文件。注意，AD 导出的 <code>.ebd</code> 文件是保存在 <code>&lt;project_name&gt;.edb</code> 文件夹内的 <code>edb.def</code> 文件，从 <code>Ansys SIwave</code> 导入时需要选中 <code>&lt;project_name&gt;.edb</code> 文件夹才能正确导入。</p>
+<p>导入后，会弹出 <code>Select nets to import from main</code> 窗口，勾选需要导入的网络后点击 <code>Import Configuration</code> 即可导入到 <code>Ansys SIwave</code> 中。</p>
+<p>接着，在 <code>Ansys SIwave</code> 左侧的 <code>Signal</code> 页内勾选所需的信号，选中的网络会在其下方的 <code>Selected Nets</code> 内显示。</p>
+<p>最后，保存当前的 <code>SIwave</code> 工程，在上方的 <code>Export</code> 内选择 <code>Export to Q3D Extractor...</code>，在弹出的 <code>Export Q3D Project</code> 界面，勾选 <code>Capacitance</code>、<code>DC Inductance/Resistance</code>、<code>DC Resistance</code> 和 <code>AC Inductance/Resistance</code> 选项即可。</p>
+<h3 id="Ansys-Electronics-Desktop-仿真"><code>Ansys Electronics Desktop</code> 仿真</h3>
+<p>使用 <code>Ansys Electronics Desktop</code> 打开 <code>Ansys SIwave</code> 导出的 <code>.aedt</code> 文件，可看到 PCB 的模型，其中包括之前选中网络的铜箔、过孔通孔、基板与过孔填充材料。<code>copper</code> 材质的为铜箔和过孔通孔；<code>FR4_epoxy</code> 为基板材料，一般都是 <code>FR4</code>；<code>solder</code> 为贴片元件焊盘。一般基板与贴片元件焊盘影响不大，可直接删除 <code>FR4_epoxy</code> 和 <code>solder</code> 材料下的模型。并且，如果不删除 <code>solder</code> 下的模型，仿真报错 <code>Terminal 'xxx': Terminal should be assigned on conductors </code> 与 <code>Terminal 'xxx': Terminal is in the wrong net</code>；执行 <code>Auto Identify Nets</code> 后会在每个贴片元件焊盘自动生成一个 <code>Current Source</code> 与 <code>Current Sink</code>，这一般都是错误的，仿真也会报错。</p>
+<p>接着要对铜箔进行连接，某些走线虽然是相同网络，但可能并不相连。这时就需要手动绘制一些长方体将这些孤立的铜箔相连。当然，如果不影响参数提取，也可不手动连接，也可直接删除。</p>
+<p>之后设置 <code>Current Source</code> 与 <code>Current Sink</code>。一个网络上只能有一个 <code>Current Sink</code>，但可有多个 <code>Current Source</code>。按 <code>F</code> 切换到 <code>Face</code>，选中一个面，<code>右键-&gt;Assign Exaction-&gt;Sink</code> 或者 <code>右键-&gt;Assign Exaction-&gt;Source</code> 即可。</p>
+<p>为防止网络设置有错误，可在模型的任意位置 <code>右键-&gt;Auto Identify Nets</code> 自动划分网络。这一步并不必要，有时不进行也不会报错，但如果无法仿真不妨尝试一下。</p>
+<p>然后配置仿真设置。在 <code>Project Manager</code> 窗口内的 <code>Analysis</code> 上 <code>右键-&gt;Add Solution Setup...</code> 添加一个仿真设置。一般只需修改 <code>General</code> 中的 <code>Solution Frequency</code>。</p>
+<p>如果需要对不同频率下的电路进行仿真，可在特定的仿真设置，比如 <code>Setup1</code> 上，<code>右键-&gt;Add Frequency Sweep</code> 添加扫频。</p>
+<p>最后，在 <code>Project Manager</code> 窗口内的 <code>Analysis</code> 上 <code>右键-&gt;Analysis All</code> 运行仿真。仿真结束后，在 <code>Project Manager</code> 窗口内的 <code>Results</code> 上 <code>右键-&gt;Solution Data</code>。在 <code>Solution: main - Q3DModel</code> 窗口内，将右侧的 <code>CG</code> 改为 <code>AC RL</code> 下方就会显示寄生电阻和电感。</p>
+<p>也可在 <code>Field Overlays</code> 中选择 <code>AC R/L Fields</code> 中的 <code>SubfaceJac</code>，即可视化表面电流密度。</p>
+<h2 id="杂谈">杂谈</h2>
+<p>貌似 PCB 文件中有中文会导致仿真失败。为保证无中文，可新建一个 PCB，将需要提取寄生参数的网络复制到新 PCB 中。</p>
+<h2 id="相关文章">相关文章</h2>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/hu706789355/article/details/134407524">Q3D对PCB电路板寄生参数提取，RLC_q3d提取寄生参数-CSDN博客</a><br>
+<a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_46413772/article/details/137653876">用ansys q3d提取pcb板上的寄生参数及注意事项_ansys仿真寄生参数-CSDN博客</a></p>
 
     </div>
 
@@ -373,7 +326,7 @@ PD = Dedicated to or marked as being in the public domain via one of our <a targ
   </li>
   <li class="post-copyright-link">
       <strong>本文链接：</strong>
-      <a href="https://sxr1223.github.io/post/69ecce42380b/" title="CC知识分享协议">https://sxr1223.github.io/post/69ecce42380b/</a>
+      <a href="https://sxr1223.github.io/post/8c7e52219339/" title="Ansys Q3D PCB 寄生参数提取">https://sxr1223.github.io/post/8c7e52219339/</a>
   </li>
   <li class="post-copyright-license">
       <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" rel="noopener" target="_blank"><i class="fab fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
@@ -409,21 +362,18 @@ PD = Dedicated to or marked as being in the public domain via one of our <a targ
 </div>
 
           <div class="post-tags">
-              <a href="/tags/%E5%BC%80%E6%BA%90%E5%8D%8F%E8%AE%AE/" rel="tag"><i class="fa fa-tag"></i> 开源协议</a>
+              <a href="/tags/%E7%94%B5%E8%B7%AF-%E4%BB%BF%E7%9C%9F%E8%BD%AF%E4%BB%B6-Ansys/" rel="tag"><i class="fa fa-tag"></i> 电路/仿真软件/Ansys</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/post/18c1db9d901b/" rel="prev" title="微信数据导出-整体框架">
-                  <i class="fa fa-angle-left"></i> 微信数据导出-整体框架
+                <a href="/post/e71454bcd5ff/" rel="prev" title="Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析）">
+                  <i class="fa fa-angle-left"></i> Modelsim 利用 TCL 快速仿真（gowin 与 pango 仿真解析）
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/post/052635504fc8/" rel="next" title="功能测试">
-                  功能测试 <i class="fa fa-angle-right"></i>
-                </a>
             </div>
           </div>
     </footer>
